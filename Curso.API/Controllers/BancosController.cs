@@ -1,4 +1,5 @@
 ﻿using Curso.Domain.Contracts.Repositories;
+using Curso.Domain.Contracts.Services;
 using Curso.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -9,9 +10,9 @@ namespace Curso.API.Controllers
     [Route("[controller]")]
     public class BancosController
     {
-        private readonly IBancoRepository _banco;
+        private readonly IBancoService _banco;
 
-        public BancosController(IBancoRepository banco)
+        public BancosController(IBancoService banco)
         {
             _banco = banco;
         }
@@ -20,6 +21,12 @@ namespace Curso.API.Controllers
         public List<Banco> Get()
         {
             return _banco.GetBancos();
+        }
+
+        [HttpGet("{id}")]
+        public Banco Get(int id)
+        {
+            return _banco.GetBancosById(id);
         }
 
     }

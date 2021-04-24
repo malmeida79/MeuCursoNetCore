@@ -35,18 +35,20 @@ namespace Curso.UI
             // cmbBancos
             // 
             this.cmbBancos.FormattingEnabled = true;
-            this.cmbBancos.Location = new System.Drawing.Point(12, 12);
+            this.cmbBancos.Location = new System.Drawing.Point(8, 7);
+            this.cmbBancos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbBancos.Name = "cmbBancos";
-            this.cmbBancos.Size = new System.Drawing.Size(574, 33);
+            this.cmbBancos.Size = new System.Drawing.Size(403, 23);
             this.cmbBancos.TabIndex = 0;
             // 
             // FrmBanco
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(598, 281);
+            this.ClientSize = new System.Drawing.Size(419, 169);
             this.Controls.Add(this.cmbBancos);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "FrmBanco";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -23,8 +23,12 @@ namespace Curso.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddTransient<IBancoService, BancoService>();
+            services.AddTransient<IClienteService, ClienteService>();
+
             services.AddTransient<IBancoRepository, BancoRepository>();
+            services.AddTransient<IClienteRepository, ClienteRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -29,7 +29,7 @@ namespace Curso.UI
             }
             catch (Exception)
             {
-                MessageBox.Show("Deu erro;");            
+                MessageBox.Show("Deu erro!");
             }
 
         }
