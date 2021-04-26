@@ -33,6 +33,45 @@ namespace Curso.UI
             }
 
         }
+
+        private void cmbBancos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtNomeBanco.Text = cmbBancos.SelectedText;
+        }
+
+        private void btnFechar_Click(object sender, EventArgs e)
+        {
+            var retorno = MessageBox.Show("Deseja realmente fechar?", ":: Fechar ::", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (retorno == DialogResult.Yes) {
+                this.Close();
+            }
+        }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            if (ValidaBanco())
+            {
+                var bco = new Banco();
+                bco.CodBanco = Convert.ToInt32(cmbBancos.SelectedValue.ToString());
+                bco.NomeBanco = txtNomeBanco.Text;
+            }
+        }
+
+        private void btnNovoBanco_Click(object sender, EventArgs e)
+        {
+            if (ValidaBanco())
+            {
+                var bco = new Banco();
+                bco.CodBanco = 0;
+                bco.NomeBanco = txtNomeBanco.Text;
+            }
+        }
+
+        private bool ValidaBanco()
+        {
+            return !string.IsNullOrEmpty(txtNomeBanco.Text);
+        }
+
     }
 }
 
