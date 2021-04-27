@@ -1,4 +1,5 @@
-﻿using Curso.Domain.Contracts.Repositories;
+﻿using Curso.API.Controllers.Base;
+using Curso.Domain.Contracts.Repositories;
 using Curso.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ namespace Curso.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ClientesController
+    public class ClientesController : MainController
     {
         private readonly IClienteRepository _cliente;
 

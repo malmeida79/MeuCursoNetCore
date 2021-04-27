@@ -1,4 +1,5 @@
-﻿using Curso.Domain.Contracts.Repositories;
+﻿using Curso.API.Controllers.Base;
+using Curso.Domain.Contracts.Repositories;
 using Curso.Domain.Contracts.Services;
 using Curso.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ namespace Curso.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class BancosController
+    public class BancosController : MainController
     {
         private readonly IBancoService _banco;
 

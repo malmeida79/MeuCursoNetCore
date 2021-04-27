@@ -1,11 +1,12 @@
 ﻿using Curso.Domain.Contracts.Repositories;
 using Curso.Domain.Entities;
+using Curso.Repositories.Base;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Curso.Repositories
 {
-    public class ClienteRepository : IClienteRepository
+    public class ClienteRepository : BaseRepository<Banco>, IClienteRepository
     {
         public Cliente GetClientesById(int id)
         {
