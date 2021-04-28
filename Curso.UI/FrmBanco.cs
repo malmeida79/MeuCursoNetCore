@@ -42,7 +42,8 @@ namespace Curso.UI
         private void btnFechar_Click(object sender, EventArgs e)
         {
             var retorno = MessageBox.Show("Deseja realmente fechar?", ":: Fechar ::", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (retorno == DialogResult.Yes) {
+            if (retorno == DialogResult.Yes)
+            {
                 this.Close();
             }
         }
@@ -72,6 +73,14 @@ namespace Curso.UI
             return !string.IsNullOrEmpty(txtNomeBanco.Text);
         }
 
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            var retorno = MessageBox.Show("Deseja realmente excluir?", ":: Fechar ::", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (retorno == DialogResult.Yes)
+            {
+
+            }
+        }
     }
 }
 
