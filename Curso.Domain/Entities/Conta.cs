@@ -2,10 +2,8 @@
 
 namespace Curso.Domain.Entities
 {
-    public abstract class Conta : IConta
+    public abstract class Conta :Banco, IConta
     {
-        public string NomeBanco { get; set; }
-        public int NumeroBanco { get; set; }
         public int NumeroConta { get; set; }
         public int NumeroAgencia { get; set; }
         public decimal Saldo { get; set; }

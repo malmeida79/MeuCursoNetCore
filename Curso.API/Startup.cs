@@ -24,6 +24,8 @@ namespace Curso.API
         {
             services.AddControllers();
 
+            // services.AddDbContext<BancoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+
             services.AddTransient<IBancoService, BancoService>();
             services.AddTransient<IClienteService, ClienteService>();
 
