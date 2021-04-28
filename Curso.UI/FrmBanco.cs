@@ -36,7 +36,7 @@ namespace Curso.UI
 
         private void cmbBancos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtNomeBanco.Text = cmbBancos.SelectedText;
+            txtNomeBanco.Text = cmbBancos.Text;
         }
 
         private void btnFechar_Click(object sender, EventArgs e)
