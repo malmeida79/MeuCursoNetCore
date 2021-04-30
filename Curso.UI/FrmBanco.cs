@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Curso.CrossCutting.Uteis;
@@ -8,6 +9,9 @@ namespace Curso.UI
 {
     public partial class FrmBanco : Form
     {
+        private List<Banco> listaBancos;
+        private Banco bcoSel;
+
         public FrmBanco()
         {
             InitializeComponent();
@@ -17,7 +21,7 @@ namespace Curso.UI
         {
             try
             {
-                var listaBancos = HelperWeb.GetHttpClient<Banco>("bancos");
+                listaBancos = HelperWeb.GetHttpClient<Banco>("bancos");
 
                 if (listaBancos != null && listaBancos.Count > 0)
                 {
@@ -29,19 +33,23 @@ namespace Curso.UI
             }
             catch (Exception)
             {
-                MessageBox.Show("Deu erro!");
+                Msgs.Erro("Erro na consulta, API pode não ter sido localizada!");
             }
-
         }
 
         private void cmbBancos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtNomeBanco.Text = cmbBancos.Text;
+            bcoSel = listaBancos.Find(x => x.CodBanco == Convert.ToInt32(cmbBancos.SelectedValue.ToString()));
+            if (bcoSel != null)
+            {
+                txtNomeBanco.Text = bcoSel.NomeBanco;
+                txtNumeroBanco.Text = bcoSel.NumeroBanco;
+            }
         }
 
         private void btnFechar_Click(object sender, EventArgs e)
         {
-            var retorno = MessageBox.Show("Deseja realmente fechar?", ":: Fechar ::", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var retorno = Msgs.Confirma("Deseja realmente fechar?", ":: Fechar ::");
             if (retorno == DialogResult.Yes)
             {
                 this.Close();
@@ -52,9 +60,8 @@ namespace Curso.UI
         {
             if (ValidaBanco())
             {
-                var bco = new Banco();
-                bco.CodBanco = Convert.ToInt32(cmbBancos.SelectedValue.ToString());
-                bco.NomeBanco = txtNomeBanco.Text;
+                bcoSel.NomeBanco = txtNomeBanco.Text;
+                bcoSel.NumeroBanco = txtNumeroBanco.Text;
             }
         }
 
@@ -62,20 +69,33 @@ namespace Curso.UI
         {
             if (ValidaBanco())
             {
-                var bco = new Banco();
-                bco.CodBanco = 0;
-                bco.NomeBanco = txtNomeBanco.Text;
+                bcoSel = new Banco();
+                bcoSel.NomeBanco = txtNomeBanco.Text;
+                bcoSel.NumeroBanco = txtNumeroBanco.Text;
             }
         }
 
         private bool ValidaBanco()
         {
-            return !string.IsNullOrEmpty(txtNomeBanco.Text);
+            bool retorno = true;
+
+            if (string.IsNullOrEmpty(txtNomeBanco.Text))
+            {
+                Msgs.Erro("Deve ser informado o nome do banco!");
+                retorno = false;
+            }
+            else if (string.IsNullOrEmpty(txtNomeBanco.Text))
+            {
+                Msgs.Erro("Deve ser informado o número do banco!");
+                retorno = false;
+            }
+
+            return retorno;
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            var retorno = MessageBox.Show("Deseja realmente excluir?", ":: Fechar ::", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var retorno = Msgs.Confirma("Deseja realmente excluir?", ":: Fechar ::");
             if (retorno == DialogResult.Yes)
             {
 

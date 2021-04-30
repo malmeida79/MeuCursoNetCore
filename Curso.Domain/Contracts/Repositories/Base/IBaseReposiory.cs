@@ -1,21 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Curso.Domain.Contracts.Repositories.Base
 {
-    public interface IBaseReposiory<T> where T :class
+    public interface IBaseReposiory<TEntity> where TEntity : class
     {
-        public void Add(T entity) { 
-        }
+        //#region actions
+        //TEntity Add(TEntity entity);
+        //void Update(TEntity entity);
+        //void Delete(TEntity entity);
 
-        public void Update(T entity)
-        {
-        }
+        //#endregion
 
-        public void Delete(int ID)
-        {
+        //#region Ranges
 
-        }
+        //IEnumerable<TEntity> AddRange(IEnumerable<TEntity> entities);
+        //IEnumerable<TEntity> UpdateRange(List<TEntity> entity);
+        //void DeleteRange(List<TEntity> entity);
+
+        //#endregion
+
+        //#region Getter's
+
+        //TEntity GetById(int id);
+        //IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate = null);
+        //TEntity Get(Expression<Func<TEntity, bool>> predicate = null);
+        //IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicado);
+        //TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicado);
+
+        //#endregion
     }
 }
