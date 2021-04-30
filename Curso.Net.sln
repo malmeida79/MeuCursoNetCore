@@ -9,13 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Curso.Domain", "Curso.Domai
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Curso.Services", "Curso.Services\Curso.Services.csproj", "{235A7560-7378-49DE-8304-BDC0A8E7DD00}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Curso.Repositories", "Curso.Repositories\Curso.Repositories.csproj", "{55B89652-D418-4F07-B306-844FC8180D36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Curso.Infra", "Curso.Infra\Curso.Infra.csproj", "{55B89652-D418-4F07-B306-844FC8180D36}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Curso.API", "Curso.API\Curso.API.csproj", "{7775D7C7-C87C-4838-A053-35C322490AC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Curso.CrossCutting", "Curso.CrossCutting\Curso.CrossCutting.csproj", "{3BBA9AD9-8EF4-4FFE-8460-92B03A7786A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Curso.CrossCutting", "Curso.CrossCutting\Curso.CrossCutting.csproj", "{3BBA9AD9-8EF4-4FFE-8460-92B03A7786A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Curso.UI", "Curso.UI\Curso.UI.csproj", "{3FF9F5ED-836F-4C53-AE0A-7AF87D95322A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Curso.UI", "Curso.UI\Curso.UI.csproj", "{3FF9F5ED-836F-4C53-AE0A-7AF87D95322A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

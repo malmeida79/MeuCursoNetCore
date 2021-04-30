@@ -1,6 +1,6 @@
 using Curso.Domain.Contracts.Repositories;
 using Curso.Domain.Contracts.Services;
-using Curso.Repositories;
+using Curso.Infra.Repositories;
 using Curso.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

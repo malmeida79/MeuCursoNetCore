@@ -1,10 +1,10 @@
 ﻿using Curso.Domain.Contracts.Repositories;
 using Curso.Domain.Entities;
-using Curso.Repositories.Base;
+using Curso.Infra.Repositories.Base;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Curso.Repositories
+namespace Curso.Infra.Repositories
 {
     public class TipoContaRepository : BaseRepository<TipoConta>, ITipoContaRepository
     {
