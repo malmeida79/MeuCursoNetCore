@@ -6,8 +6,6 @@ namespace Curso.Domain.Contracts.Services
 {
     public interface IClienteService : IBaseService<Cliente>
     {
-        public List<Cliente> GetClientes();
-        public Cliente GetClientesByName(string nome);
-        public Cliente GetClientesById(int id);
+
     }
 }

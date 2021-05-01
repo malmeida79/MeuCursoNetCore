@@ -1,9 +1,11 @@
 using Curso.Domain.Contracts.Repositories;
 using Curso.Domain.Contracts.Services;
 using Curso.Infra.Repositories;
+using Curso.Infra.Repositories.Context;
 using Curso.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,7 +26,7 @@ namespace Curso.API
         {
             services.AddControllers();
 
-            // services.AddDbContext<BancoContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+             services.AddDbContext<BancosContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
             services.AddTransient<IBancoService, BancoService>();
             services.AddTransient<IClienteService, ClienteService>();

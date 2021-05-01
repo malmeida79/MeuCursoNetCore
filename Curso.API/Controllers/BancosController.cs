@@ -4,6 +4,7 @@ using Curso.Domain.Contracts.Services;
 using Curso.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Curso.API.Controllers
 {
@@ -21,13 +22,13 @@ namespace Curso.API.Controllers
         [HttpGet]
         public List<Banco> Get()
         {
-            return _banco.GetBancos();
+            return _banco.GetAll().ToList();
         }
 
         [HttpGet("{id}")]
         public Banco Get(int id)
         {
-            return _banco.GetBancosById(id);
+            return _banco.FirstOrDefault(x=>x.CodBanco == id);
         }
 
     }

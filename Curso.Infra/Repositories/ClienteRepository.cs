@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Curso.Infra.Repositories
 {
-    public class ClienteRepository : BaseRepository<Banco>, IClienteRepository
+    public class ClienteRepository : BaseRepository<Cliente>, IClienteRepository
     {
         public Cliente GetClientesById(int id)
         {

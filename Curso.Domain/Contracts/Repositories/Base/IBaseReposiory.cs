@@ -7,29 +7,29 @@ namespace Curso.Domain.Contracts.Repositories.Base
 {
     public interface IBaseReposiory<TEntity> where TEntity : class
     {
-        //#region actions
-        //TEntity Add(TEntity entity);
-        //void Update(TEntity entity);
-        //void Delete(TEntity entity);
+        #region actions
+        TEntity Add(TEntity entity);
+        void Update(TEntity entity);
+        void Delete(TEntity entity);
 
-        //#endregion
+        #endregion
 
-        //#region Ranges
+        #region Ranges
 
-        //IEnumerable<TEntity> AddRange(IEnumerable<TEntity> entities);
-        //IEnumerable<TEntity> UpdateRange(List<TEntity> entity);
-        //void DeleteRange(List<TEntity> entity);
+        IEnumerable<TEntity> AddRange(IEnumerable<TEntity> entities);
+        IEnumerable<TEntity> UpdateRange(List<TEntity> entity);
+        void DeleteRange(List<TEntity> entity);
 
-        //#endregion
+        #endregion
 
-        //#region Getter's
+        #region Getter's
 
-        //TEntity GetById(int id);
-        //IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate = null);
-        //TEntity Get(Expression<Func<TEntity, bool>> predicate = null);
-        //IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicado);
-        //TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicado);
+        TEntity GetById(int id);
+        IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate = null);
+        TEntity Get(Expression<Func<TEntity, bool>> predicate = null);
+        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicado);
+        TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicado);
 
-        //#endregion
+        #endregion
     }
 }
