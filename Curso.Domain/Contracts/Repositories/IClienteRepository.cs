@@ -7,8 +7,6 @@ namespace Curso.Domain.Contracts.Repositories
 {
     public interface IClienteRepository : IBaseReposiory<Cliente>
     {
-        public List<Cliente> GetClientes();
-        public Cliente GetClientesByName(string nome);
-        public Cliente GetClientesById(int id);
+       
     }
 }

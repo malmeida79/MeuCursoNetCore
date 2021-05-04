@@ -7,13 +7,12 @@ using System.Text;
 
 namespace Curso.Infra.Repositories.EntityConfig
 {
-    class BancosConfigure : IEntityTypeConfiguration<Banco>
+    class TipoContaConfigure : IEntityTypeConfiguration<TipoConta>
     {
 
-        public void Configure(EntityTypeBuilder<Banco> builder)
+        public void Configure(EntityTypeBuilder<TipoConta> builder)
         {
-            builder.HasKey(e => e.CodBanco);
-
+            builder.HasKey(e => e.CodTipoConta);
         }
     }
 }
