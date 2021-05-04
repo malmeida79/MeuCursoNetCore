@@ -16,7 +16,26 @@ namespace Curso.API.Controllers
         public BancosController(IServiceProvider provider) : base(provider)
         {
 
-        }     
+        }
+
+        /// <summary>
+        /// Metodo que apenas o banco pode usar, poius nao esta na main controller
+        /// apenas em sua propria controller.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("teste")]
+        public virtual IActionResult Teste()
+        {
+            try
+            {
+                return Ok("Ola Jhonny!");
+            }
+            catch (Exception ex)
+            {
+                return Ok($"ocorreu erro:{ex.Message}");
+            }
+        }
+
 
     }
 }
