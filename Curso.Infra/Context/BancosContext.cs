@@ -23,12 +23,15 @@ namespace Curso.Infra.Repositories.Context
         #region DbSets
 
         public virtual DbSet<Banco> Bancos { get; set; }
-
+        public virtual DbSet<Cliente> Clientes { get; set; }
+        public virtual DbSet<TipoConta> TipoConta { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new BancosConfigure());
+            modelBuilder.ApplyConfiguration(new ClientesConfigure());
+            modelBuilder.ApplyConfiguration(new TipoContaConfigure());
         }
     }
 }

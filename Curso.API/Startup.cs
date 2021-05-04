@@ -26,13 +26,15 @@ namespace Curso.API
         {
             services.AddControllers();
 
-             services.AddDbContext<BancosContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+            services.AddDbContext<BancosContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
             services.AddTransient<IBancoService, BancoService>();
             services.AddTransient<IClienteService, ClienteService>();
+            services.AddTransient<ITipoContaService, TipoContaService>();
 
             services.AddTransient<IBancoRepository, BancoRepository>();
             services.AddTransient<IClienteRepository, ClienteRepository>();
+            services.AddTransient<ITipoContaRepository, TipoContaRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
