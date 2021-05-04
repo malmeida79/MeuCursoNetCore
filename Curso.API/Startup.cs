@@ -1,3 +1,5 @@
+using Curso.CrossCutting.Uteis;
+using Curso.Domain.Contracts.Helpers;
 using Curso.Domain.Contracts.Repositories;
 using Curso.Domain.Contracts.Services;
 using Curso.Infra.Repositories;
@@ -27,6 +29,8 @@ namespace Curso.API
             services.AddControllers();
 
              services.AddDbContext<BancosContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+
+            services.AddSingleton<IHelperWeb, HelperWeb>();
 
             services.AddTransient<IBancoService, BancoService>();
             services.AddTransient<IClienteService, ClienteService>();

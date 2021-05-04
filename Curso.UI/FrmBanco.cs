@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Curso.CrossCutting.Uteis;
+using Curso.Domain.Contracts.Helpers;
 using Curso.Domain.Entities;
 
 namespace Curso.UI
@@ -21,7 +22,8 @@ namespace Curso.UI
         {
             try
             {
-                listaBancos = HelperWeb.GetHttpClient<Banco>("bancos");
+                var web = new HelperWeb();
+                listaBancos = web.OnGet<Banco>("bancos");
 
                 if (listaBancos != null && listaBancos.Count > 0)
                 {
