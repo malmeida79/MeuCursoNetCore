@@ -2,7 +2,6 @@
 using Curso.Domain.Contracts.Services;
 using Curso.Domain.Entities;
 using Curso.Services.Base;
-using System.Collections.Generic;
 
 namespace Curso.Services
 {

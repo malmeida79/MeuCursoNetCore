@@ -1,7 +1,5 @@
 ﻿using Curso.Domain.Containers;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Curso.Domain.Contracts.Helpers

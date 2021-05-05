@@ -1,9 +1,6 @@
 ﻿using Curso.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Curso.Infra.Repositories.EntityConfig
 {
@@ -14,6 +11,9 @@ namespace Curso.Infra.Repositories.EntityConfig
         {
             builder.HasKey(e => e.CodBanco);
 
+            builder.HasMany<ContaCorrente>(d => d.Contas)
+            .WithOne(p => p.Banco)
+            .HasForeignKey(d => d.CodBanco);
         }
     }
 }

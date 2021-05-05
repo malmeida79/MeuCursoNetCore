@@ -1,9 +1,6 @@
 ﻿using Curso.API.Controllers.Base;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Curso.API.Controllers
 {

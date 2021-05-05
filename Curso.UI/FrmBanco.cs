@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Curso.CrossCutting.Uteis;
-using Curso.Domain.Contracts.Helpers;
 using Curso.Domain.Entities;
 
 namespace Curso.UI

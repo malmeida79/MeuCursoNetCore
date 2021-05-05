@@ -1,42 +1,22 @@
-﻿using Curso.Domain.Contracts;
+﻿using Curso.Domain.Entities.Base;
 using Curso.Domain.Enuns;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Curso.Domain.Entities
 {
-    public class ContaCorrente: Conta, IConta
+    public class ContaCorrente : BaseEntity
     {
-        private string _nome;
-        private int _numero;
-
-        // construtor sem exigencia de valores
-        public ContaCorrente()
-        {
-
-        }
-
-        // construtor com exigencia de valores (sobrecarga)
-        public ContaCorrente(string nomeBanco, int numeroBanco)
-        {
-            _nome = nomeBanco;
-            _numero = numeroBanco;
-        }
-
-        public EnumTipoConta TipoConta { get; set; }
+        public string NumeroConta { get; set; }
+        public string NumeroAgencia { get; set; }
+        public decimal Saldo { get; set; }
+        public decimal Limite { get; set; }
+        public int CodBanco { get; set; }
+        public int CodContaCorrente { get; set; }
         public DateTime DataAbertura { get; set; }
+        public Banco Banco { get; set; }
 
-        // fazendo override para mudar o metodo que esta sendo herdado.
-        public override string CadastraConta()
-        {
-            // se nao vazio ou nulo, usar o valor
-            if (!string.IsNullOrEmpty(_nome))
-            {
-                return _nome;
-            }
-            else
-            {
-                return "Sem nome de banco";
-            }
-        }
+        [NotMapped]
+        public EnumTipoConta TipoConta { get; set; }
     }
 }

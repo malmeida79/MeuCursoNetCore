@@ -5,14 +5,14 @@ using Curso.Infra.Repositories.Context;
 
 namespace Curso.Infra.Repositories
 {
-    public class ClienteRepository : BaseRepository<Cliente>, IClienteRepository
+    public class RelContaClienteRepository : BaseRepository<RelContaCliente>, IRelContaClienteRepository
     {
-        public ClienteRepository()
+        public RelContaClienteRepository()
         {
 
         }
 
-        public ClienteRepository(BancosContext dbContext) : base(dbContext)
+        public RelContaClienteRepository(BancosContext dbContext) : base(dbContext)
         {
 
         }

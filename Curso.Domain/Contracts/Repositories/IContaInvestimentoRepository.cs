@@ -4,8 +4,8 @@ using Curso.Domain.Entities;
 
 namespace Curso.Domain.Contracts.Repositories
 {
-    public interface IClienteRepository : IBaseReposiory<Cliente>
+    public interface IContaInvestimentoRepository : IBaseReposiory<ContaInvestimento>
     {
-       
+
     }
 }

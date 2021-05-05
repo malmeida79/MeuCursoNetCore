@@ -8,9 +8,9 @@ namespace Curso.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TipoContaController : MainController<TipoConta, ITipoContaService>
+    public class ContaCorrenteController : MainController<ContaCorrente, IContaCorrenteService>
     {
-        public TipoContaController(IServiceProvider provider) : base(provider)
+        public ContaCorrenteController(IServiceProvider provider) : base(provider)
         {
 
         }

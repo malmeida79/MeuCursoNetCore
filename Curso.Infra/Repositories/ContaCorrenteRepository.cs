@@ -5,17 +5,16 @@ using Curso.Infra.Repositories.Context;
 
 namespace Curso.Infra.Repositories
 {
-    public class BancoRepository : BaseRepository<Banco>, IBancoRepository
+    public class ContaCorrenteRepository : BaseRepository<ContaCorrente>, IContaCorrenteRepository
     {
-        public BancoRepository(BancosContext dbContext) : base(dbContext)
+        public ContaCorrenteRepository()
         {
 
         }
 
-        public BancoRepository()
+        public ContaCorrenteRepository(BancosContext dbContext) : base(dbContext)
         {
 
-        }       
-
+        }
     }
 }

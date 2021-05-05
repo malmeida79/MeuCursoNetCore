@@ -1,7 +1,6 @@
 ﻿using Curso.Domain.Enuns;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Curso.Domain.Containers
 {

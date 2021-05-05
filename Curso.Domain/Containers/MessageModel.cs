@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Curso.Domain.Containers
+﻿namespace Curso.Domain.Containers
 {
     public class MessageModel
     {

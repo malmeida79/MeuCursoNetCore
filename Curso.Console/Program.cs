@@ -21,25 +21,19 @@ namespace Primeiro
             ccInvest.Saldo = 3000;
             ccInvest.TaxaAdm = 2;
 
-            // Usando metodo sem alteração usando o original
-            var teste = ccInvest.CadastraConta();
 
             //  instanciando classe fazendo uso do construtor
-            ContaCorrente ccCliente = new ContaCorrente("Itau", 341);
-            ccCliente.NumeroConta = 12345;
-            ccCliente.NumeroAgencia = 43;
+            ContaCorrente ccCliente = new ContaCorrente();
+            ccCliente.NumeroConta = "12345";
+            ccCliente.NumeroAgencia = "43";
             ccCliente.Saldo = 100;
             ccCliente.Limite = 350;
             ccCliente.TipoConta = EnumTipoConta.Conjunta;
 
-            // Usando metodo com alteração fazendo override e trocando
-            // conteudo do mesmo
-            var teste2 = ccCliente.CadastraConta();
-
             // simplesmente instanciando classes com construtor simples
             ContaCorrente conta = new ContaCorrente();
-            conta.NumeroConta = 56789;
-            conta.NumeroAgencia = 86;
+            conta.NumeroConta = "56789";
+            conta.NumeroAgencia = "86";
             conta.Saldo = 300;
             conta.Limite = 200;
             conta.TipoConta = EnumTipoConta.Digital;

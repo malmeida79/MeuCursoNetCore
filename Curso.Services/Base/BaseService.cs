@@ -3,7 +3,6 @@ using Curso.Domain.Contracts.Services.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Curso.Services.Base
 {

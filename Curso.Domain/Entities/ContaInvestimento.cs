@@ -1,14 +1,16 @@
-﻿using Curso.Domain.Contracts;
+﻿using Curso.Domain.Entities.Base;
 
 namespace Curso.Domain.Entities
 {
-    public class ContaInvestimento : Conta, IConta
+    public class ContaInvestimento : BaseEntity
     {
+        public string NumeroConta { get; set; }
+        public string NumeroAgencia { get; set; }
+        public decimal Saldo { get; set; }
+        public decimal Limite { get; set; }
+        public int CodContaInvestimento { get; set; }
         public string Chave { get; set; }
         public decimal TaxaAdm { get; set; }
-
-        // obs: Nesse metodo não fizemos override do metodo
-        // CadastraConta então ao ser chamado ele seguira com
-        // seu comportamento normal e original.
+        public int CodBanco { get; set; }
     }
 }
