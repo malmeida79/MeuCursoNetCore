@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Curso.CrossCutting.Uteis;
+using Curso.Domain.Configs;
+using Curso.Domain.Contracts.Helpers;
 using Curso.Domain.Entities;
+using Curso.Domain.Enuns;
+using Microsoft.Extensions.Options;
 
 namespace Curso.UI
 {
@@ -11,9 +15,12 @@ namespace Curso.UI
     {
         private List<Banco> listaBancos;
         private Banco bcoSel;
+        private readonly IHelperWeb _web;
 
-        public FrmBanco()
+        public FrmBanco(IHelperWeb web)
         {
+            _web = web;
+            _web.UrlBase = Properties.Settings.Default.EndPointAddress;
             InitializeComponent();
         }
 
@@ -21,20 +28,28 @@ namespace Curso.UI
         {
             try
             {
-                var web = new HelperWeb();
-                listaBancos = web.OnGet<Banco>("bancos");
+                var consulta = _web.OnGet<Banco>("bancos");
 
-                if (listaBancos != null && listaBancos.Count > 0)
+                if (consulta.Status == StatusResult.Success)
                 {
-                    listaBancos = listaBancos.OrderBy(x => x.NomeBanco).ToList();
-                    cmbBancos.DisplayMember = "NomeBanco";
-                    cmbBancos.ValueMember = "CodBanco";
-                    cmbBancos.DataSource = listaBancos;
+                    listaBancos = consulta.Data;
+
+                    if (listaBancos != null && listaBancos.Count > 0)
+                    {
+                        listaBancos = listaBancos.OrderBy(x => x.NomeBanco).ToList();
+                        cmbBancos.DisplayMember = "NomeBanco";
+                        cmbBancos.ValueMember = "CodBanco";
+                        cmbBancos.DataSource = listaBancos;
+                    }
+                }
+                else
+                {
+                    throw new Exception(consulta.Messages[0].Text);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Msgs.Erro("Erro na consulta, API pode não ter sido localizada!");
+                Msgs.Erro($"Erro na consulta: {ex.Message}");
             }
         }
 
@@ -102,6 +117,29 @@ namespace Curso.UI
 
             }
         }
+
+        // if (formISOpen("Fila"))
+        //    {
+        //        return;
+        //    }
+
+        //private bool formISOpen(string formName)
+        //{
+
+        //    bool retorno = false;
+
+        //    FormCollection fc = Application.OpenForms;
+
+        //    foreach (Form frm in fc)
+        //    {
+        //        if (frm.Name == formName)
+        //        {
+        //            retorno = true;
+        //        }
+        //    }
+
+        //    return retorno;
+        //}
     }
 }
 

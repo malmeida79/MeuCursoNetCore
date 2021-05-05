@@ -1,4 +1,5 @@
 using Curso.CrossCutting.Uteis;
+using Curso.Domain.Configs;
 using Curso.Domain.Contracts.Helpers;
 using Curso.Domain.Contracts.Repositories;
 using Curso.Domain.Contracts.Services;
@@ -26,12 +27,15 @@ namespace Curso.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Recebendo as opções e levando para todas bibliotecas
+            services.Configure<AppSettingsConfig>(Configuration.GetSection("ApplicationSettings"));
+            services.AddOptions();
+
             services.AddControllers();
 
             services.AddDbContext<BancosContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
-
+            services.AddHttpClient();
             services.AddSingleton<IHelperWeb, HelperWeb>();
-
             services.AddTransient<IBancoService, BancoService>();
             services.AddTransient<IClienteService, ClienteService>();
             services.AddTransient<ITipoContaService, TipoContaService>();

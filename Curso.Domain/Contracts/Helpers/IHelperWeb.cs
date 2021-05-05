@@ -6,10 +6,10 @@ namespace Curso.Domain.Contracts.Helpers
 {
     public interface IHelperWeb
     {
-        public List<T> OnGet<T>(string endPoint);
-        Task<RequestResultModel<T>> OnGetASync<T>(string controler, string metodo = null, string[] parametros = null);
-        Task<RequestResultModel> OnPostASync(string controler, object objeto, string metodo = null);
-        Task<RequestResultModel> OnPutASync(string controler, object objeto, string metodo = null);
-        Task<RequestResultModel> OnDeleteASync(string controler, string metodo = null, string[] parametros = null);
+        public string UrlBase { get; set; }
+        RequestResultModel<List<T>> OnGet<T>(string controler, string metodo = null, string[] parametros = null);
+        RequestResultModel OnPost(string controler, object objeto, string metodo = null);
+        RequestResultModel OnPut(string controler, object objeto, string metodo = null);
+        RequestResultModel OnDelete(string controler, string metodo = null, string[] parametros = null);
     }
 }

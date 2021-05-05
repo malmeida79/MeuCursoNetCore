@@ -1,7 +1,9 @@
-﻿using Curso.Domain.Containers;
+﻿using Curso.Domain.Configs;
+using Curso.Domain.Containers;
 using Curso.Domain.Contracts.Helpers;
 using Curso.Domain.Enuns;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -16,110 +18,86 @@ namespace Curso.CrossCutting.Uteis
 {
     public class HelperWeb : IHelperWeb
     {
-
         private readonly IHttpClientFactory _clientFactory;
-        private readonly IConfiguration _config;
-        private string urlBase = "";
+        public string UrlBase { get; set; }
 
-        public HelperWeb() { 
-        
-
-        }
-
-        public HelperWeb(IConfiguration config, IHttpClientFactory clientFactory)
+        public HelperWeb(IHttpClientFactory clientFactory)
         {
-            _config = config;
             _clientFactory = clientFactory;
-            urlBase = _config.GetSection("EndPointAddress").Value;
         }
 
-        public List<T> OnGet<T>(string endPoint)
+        public RequestResultModel<List<T>> OnGet<T>(string controler, string metodo = null, string[] parametros = null)
         {
-            var retorno = new List<T>();
-            var URI = $@"http://localhost:48542/{endPoint}";
-            using (var client = new HttpClient())
-            {
-                using (var response = client.GetAsync(URI).Result)
-                {
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var DadosJsonString = response.Content.ReadAsStringAsync().Result;
-                        retorno = JsonConvert.DeserializeObject<T[]>(DadosJsonString).ToList();
-                    }
-                }
-            }
+            var retorno = new RequestResultModel<List<T>>();
 
-            return retorno;
-        }
-
-        public async Task<RequestResultModel<T>> OnGetASync<T>(string controler, string metodo = null, string[] parametros = null)
-        {
             try
             {
                 using (var client = MakeHttpClient())
                 {
-                    var responseTask = await client.GetStringAsync(GetAddress(controler, metodo, parametros));
+                    var response = client.GetAsync(GetAddress(controler, metodo, parametros)).Result;
 
-                    if (!string.IsNullOrEmpty(responseTask))
+                    if (response.IsSuccessStatusCode)
                     {
-                        return JsonConvert.DeserializeObject<RequestResultModel<T>>(responseTask);
+                        var DadosJsonString = response.Content.ReadAsStringAsync().Result;
+                        var obj = JsonConvert.DeserializeObject<T[]>(DadosJsonString).ToList();
+                        retorno.Status = StatusResult.Success;
+                        retorno.Data = obj;
+                        return retorno;
                     }
                 }
             }
             catch (Exception ex)
             {
-
-                return new RequestResultModel<T>(StatusResult.Danger, default(T), new MessageModel("Erro ao recuperar dados."));
+                return new RequestResultModel<List<T>>(StatusResult.Danger, default(List<T>), new MessageModel($"Erro ao recuperar dados:{ex.Message}"));
             }
 
-            return new RequestResultModel<T>(StatusResult.Danger, default(T), new MessageModel("Erro ao recuperar dados."));
+            return new RequestResultModel<List<T>>(StatusResult.Danger, default(List<T>), new MessageModel("Erro ao recuperar dados."));
         }
 
-        public async Task<RequestResultModel> OnPostASync(string controler, object objeto, string metodo = null)
+        public RequestResultModel OnPost(string controler, object objeto, string metodo = null)
         {
             try
             {
                 using (var client = MakeHttpClient())
                 {
-                    var response = await client.PostAsync(GetAddress(controler, metodo), GetByteArrayContent(objeto)).ConfigureAwait(false);
+                    var response = client.PostAsync(GetAddress(controler, metodo), GetByteArrayContent(objeto)).Result;
                     return TrataResposta(response, "Post");
                 }
             }
             catch (Exception ex)
             {
-                return new RequestResultModel(StatusResult.Danger, new MessageModel("Erro ao enviar dados."));
+                return new RequestResultModel(StatusResult.Danger, new MessageModel($"Erro ao enviar dados:{ex.Message}"));
             }
         }
 
-
-        public async Task<RequestResultModel> OnPutASync(string controler, object objeto, string metodo = null)
+        public RequestResultModel OnPut(string controler, object objeto, string metodo = null)
         {
             using (var client = MakeHttpClient())
             {
                 try
                 {
-                    var response = await client.PutAsync(GetAddress(controler, metodo), GetByteArrayContent(objeto)).ConfigureAwait(false);
+                    var response = client.PutAsync(GetAddress(controler, metodo), GetByteArrayContent(objeto)).Result;
                     return TrataResposta(response, "Put");
                 }
                 catch (Exception ex)
                 {
-                    return new RequestResultModel(StatusResult.Danger, new MessageModel("Erro ao atualizar dados."));
+                    return new RequestResultModel(StatusResult.Danger, new MessageModel($"Erro ao atualizar dados:{ex.Message}"));
                 }
             }
         }
 
-        public async Task<RequestResultModel> OnDeleteASync(string controler, string metodo = null, string[] parametros = null)
+        public RequestResultModel OnDelete(string controler, string metodo = null, string[] parametros = null)
         {
             using (var client = MakeHttpClient())
             {
                 try
                 {
-                    var response = await client.DeleteAsync(GetAddress(controler, metodo, parametros));
+                    var response = client.DeleteAsync(GetAddress(controler, metodo, parametros)).Result;
                     return TrataResposta(response, "Delete");
                 }
                 catch (Exception ex)
                 {
-                    return new RequestResultModel(StatusResult.Danger, new MessageModel("Erro ao excluir dados."));
+                    return new RequestResultModel(StatusResult.Danger, new MessageModel($"Erro ao excluir dados:{ex.Message}."));
                 }
             }
         }
@@ -153,7 +131,7 @@ namespace Curso.CrossCutting.Uteis
         {
             var client = _clientFactory.CreateClient();
 
-            client.BaseAddress = new Uri(urlBase);
+            client.BaseAddress = new Uri(UrlBase);
 
             //if (passaBearer)
             //{

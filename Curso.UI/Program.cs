@@ -1,3 +1,7 @@
+using Curso.CrossCutting.Uteis;
+using Curso.Domain.Contracts.Helpers;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows.Forms;
 
@@ -11,10 +15,34 @@ namespace Curso.UI
         [STAThread]
         static void Main()
         {
-            Application.SetHighDpiMode(HighDpiMode.SystemAware);
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmBanco());
+            var builder = new HostBuilder().ConfigureServices((hostContext, services) =>
+            {
+                services.AddHttpClient();
+                services.AddSingleton<FrmBanco>();
+                services.AddScoped<IHelperWeb, HelperWeb>();
+            });
+
+            var host = builder.Build();
+
+            using (var serviceScope = host.Services.CreateScope())
+            {
+                var services = serviceScope.ServiceProvider;
+                try
+                {
+                    Application.SetHighDpiMode(HighDpiMode.SystemAware);
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+
+                    var frmPrincipal = services.GetRequiredService<FrmBanco>();
+
+                    Application.Run(frmPrincipal);
+                }
+                catch (Exception ex)
+                {
+                    Msgs.Erro($"Ocorreu erro de injeção:{ex.Message}");
+                    throw;
+                }
+            }
         }
     }
 }
