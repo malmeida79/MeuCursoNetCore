@@ -133,8 +133,12 @@ namespace Curso.UI
                 btnExcluir.Enabled = true;
 
                 btnSalvar.Text = "Salvar";
-                txtNomeBanco.Text = bcoSel.NomeBanco;
-                txtNumeroBanco.Text = bcoSel.NumeroBanco;
+
+                if (bcoSel != null)
+                {
+                    txtNomeBanco.Text = bcoSel.NomeBanco;
+                    txtNumeroBanco.Text = bcoSel.NumeroBanco;
+                }
 
                 btnNovoBanco.Text = "Novo Banco";
             }
