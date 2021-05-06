@@ -163,19 +163,41 @@ namespace Curso.CrossCutting.Uteis
 
         private RequestResultModel TrataResposta(HttpResponseMessage response, string acao)
         {
+            var retorno = new RequestResultModel();
+
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 try
                 {
                     var result = response.Content.ReadAsStringAsync().Result;
-                    return JsonConvert.DeserializeObject<RequestResultModel>(result);
+
+                    retorno.Status = StatusResult.Success;
+                    retorno.Data = null;
+                    var msgAcao = "";
+
+                    if (acao == "Post")
+                    {
+                        msgAcao = "Cadastro";
+                    }
+                    else if (acao == "Put")
+                    {
+                        msgAcao = "Alteração";
+                    }
+                    else if (acao == "Delete")
+                    {
+                        msgAcao = "Delete";
+                    }
+
+                    retorno.Messages.Add(new MessageModel($"Operação {msgAcao}, realizada com sucesso!"));
+
+                    return retorno;
                 }
                 catch (Exception ex)
                 {
                     RequestResultModel res = new RequestResultModel();
                     res.Data = null;
                     res.Status = StatusResult.Danger;
-                    res.Messages.Add(new MessageModel("Falha na recuperação dos dados, resposta da API não estava em formato correto."));
+                    res.Messages.Add(new MessageModel($"Falha na recuperação dos dados:{ex.Message}"));
                     return res;
                 }
             }

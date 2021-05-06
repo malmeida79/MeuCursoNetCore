@@ -14,7 +14,6 @@ namespace Curso.UI
 
             MessageBox.Show(mensagem, titulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
         public static void Alerta(string mensagem, string titulo = "")
         {
             if (string.IsNullOrEmpty(titulo))
@@ -23,6 +22,16 @@ namespace Curso.UI
             }
 
             MessageBox.Show(mensagem, titulo, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        public static void Informa(string mensagem, string titulo = "")
+        {
+            if (string.IsNullOrEmpty(titulo))
+            {
+                titulo = ":: sistema ::";
+            }
+
+            MessageBox.Show(mensagem, titulo, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public static DialogResult Confirma(string mensagem, string titulo = "")
