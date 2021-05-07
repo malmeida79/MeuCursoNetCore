@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using Curso.CrossCutting.Uteis;
-using Curso.Domain.Configs;
 using Curso.Domain.Contracts.Helpers;
 using Curso.Domain.Entities;
 using Curso.Domain.Enuns;
-using Microsoft.Extensions.Options;
 
 namespace Curso.UI
 {
@@ -223,29 +220,6 @@ namespace Curso.UI
 
         #endregion
 
-
-        // if (formISOpen("Fila"))
-        //    {
-        //        return;
-        //    }
-
-        //private bool formISOpen(string formName)
-        //{
-
-        //    bool retorno = false;
-
-        //    FormCollection fc = Application.OpenForms;
-
-        //    foreach (Form frm in fc)
-        //    {
-        //        if (frm.Name == formName)
-        //        {
-        //            retorno = true;
-        //        }
-        //    }
-
-        //    return retorno;
-        //}
     }
 }
 

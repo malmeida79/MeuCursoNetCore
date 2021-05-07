@@ -19,6 +19,7 @@ namespace Curso.UI
             {
                 services.AddHttpClient();
                 services.AddSingleton<FrmBanco>();
+                services.AddSingleton<FrmPrincipal>();
                 services.AddScoped<IHelperWeb, HelperWeb>();
             });
 
@@ -33,7 +34,7 @@ namespace Curso.UI
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
 
-                    var frmPrincipal = services.GetRequiredService<FrmBanco>();
+                    var frmPrincipal = services.GetRequiredService<FrmPrincipal>();
 
                     Application.Run(frmPrincipal);
                 }
