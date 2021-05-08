@@ -30,7 +30,7 @@ namespace Curso.UI
 
         private void mnuClientes_Click(object sender, EventArgs e)
         {
-            if (formISOpen("FrmCliente"))
+            if (ChildISOpen("FrmCliente"))
             {
                 return;
             }
@@ -42,7 +42,7 @@ namespace Curso.UI
 
         private void mnuCI_Click(object sender, EventArgs e)
         {
-            if (formISOpen("FrmContaInvestimento"))
+            if (ChildISOpen("FrmContaInvestimento"))
             {
                 return;
             }
@@ -54,7 +54,7 @@ namespace Curso.UI
 
         private void mnuCC_Click(object sender, EventArgs e)
         {
-            if (formISOpen("FrmContaCorrente"))
+            if (ChildISOpen("FrmContaCorrente"))
             {
                 return;
             }
@@ -66,7 +66,7 @@ namespace Curso.UI
 
         private void mnuBancos_Click(object sender, EventArgs e)
         {
-            if (formISOpen("FmrBanco"))
+            if (ChildISOpen("FmrBanco"))
             {
                 return;
             }
@@ -78,7 +78,7 @@ namespace Curso.UI
 
         private void mnuTipoConta_Click(object sender, EventArgs e)
         {
-            if (formISOpen("FrmTipoConta"))
+            if (ChildISOpen("FrmTipoConta"))
             {
                 return;
             }
@@ -89,20 +89,16 @@ namespace Curso.UI
 
         }
 
-        private bool formISOpen(string formName)
+        private void mnuSobre_Click(object sender, EventArgs e)
         {
-            bool retorno = false;
-
-            foreach (Form child in this.MdiChildren)
+            if (ChildISOpen("FrmSobre"))
             {
-                if (child.Text == formName)
-                {
-                    child.BringToFront();
-                    return true;
-                }
+                return;
             }
 
-            return retorno;
+            FrmSobre frm = new FrmSobre();
+            frm.MdiParent = this;
+            frm.Show();
         }
 
         private void mnuHorizontal_Click(object sender, EventArgs e)
@@ -119,5 +115,41 @@ namespace Curso.UI
         {
             this.LayoutMdi(MdiLayout.Cascade);
         }
+
+        private bool ChildISOpen(string formName)
+        {
+            bool retorno = false;
+
+            foreach (Form child in this.MdiChildren)
+            {
+                if (child.Name == formName)
+                {
+                    child.BringToFront();
+                    return true;
+                }
+            }
+
+            return retorno;
+        }
+
+        private bool FormISOpen(string formName)
+        {
+
+            bool retorno = false;
+
+            FormCollection fc = Application.OpenForms;
+
+            foreach (Form frm in fc)
+            {
+                if (frm.Name == formName)
+                {
+                    retorno = true;
+                }
+            }
+
+            return retorno;
+        }
+
+
     }
 }

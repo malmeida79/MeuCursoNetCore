@@ -29,10 +29,21 @@ namespace Curso.UI
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmTipoConta));
+            this.SuspendLayout();
+            // 
+            // FrmTipoConta
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "FrmTipoConta";
+            this.ClientSize = new System.Drawing.Size(683, 272);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.Name = "FrmTipoConta";
+            this.Text = ":: Tipos de Conta ::";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

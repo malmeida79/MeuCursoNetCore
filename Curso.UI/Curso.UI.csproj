@@ -25,6 +25,27 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Icons\1486564168-finance-bank-check_81495.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Icons\1486564170-finance-replenishment_81502.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Icons\1486564179-finance-saving_81499.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Icons\1486564180-finance-financial-report_81493.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Icons\admin_user_man_22187.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Icons\bank_22179.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Icons\dollar_22165.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Icons\wallet_money_bills_purse_icon_187070.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
