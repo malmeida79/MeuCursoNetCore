@@ -28,18 +28,16 @@ namespace Curso.CrossCutting.Uteis
 
             try
             {
-                using (var client = MakeHttpClient())
-                {
-                    var response = client.GetAsync(GetAddress(controler, metodo, parametros)).Result;
+                using var client = MakeHttpClient();
+                var response = client.GetAsync(GetAddress(controler, metodo, parametros)).Result;
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var DadosJsonString = response.Content.ReadAsStringAsync().Result;
-                        var obj = JsonConvert.DeserializeObject<T[]>(DadosJsonString).ToList();
-                        retorno.Status = StatusResult.Success;
-                        retorno.Data = obj;
-                        return retorno;
-                    }
+                if (response.IsSuccessStatusCode)
+                {
+                    var DadosJsonString = response.Content.ReadAsStringAsync().Result;
+                    var obj = JsonConvert.DeserializeObject<T[]>(DadosJsonString).ToList();
+                    retorno.Status = StatusResult.Success;
+                    retorno.Data = obj;
+                    return retorno;
                 }
             }
             catch (Exception ex)
@@ -54,11 +52,9 @@ namespace Curso.CrossCutting.Uteis
         {
             try
             {
-                using (var client = MakeHttpClient())
-                {
-                    var response = client.PostAsync(GetAddress(controler, metodo), GetByteArrayContent(objeto)).Result;
-                    return TrataResposta(response, "Post");
-                }
+                using var client = MakeHttpClient();
+                var response = client.PostAsync(GetAddress(controler, metodo), GetByteArrayContent(objeto)).Result;
+                return TrataResposta(response, "Post");
             }
             catch (Exception ex)
             {
@@ -68,40 +64,35 @@ namespace Curso.CrossCutting.Uteis
 
         public RequestResultModel OnPut(string controler, object objeto, string metodo = null)
         {
-            using (var client = MakeHttpClient())
+            using var client = MakeHttpClient();
+            try
             {
-                try
-                {
-                    var response = client.PutAsync(GetAddress(controler, metodo), GetByteArrayContent(objeto)).Result;
-                    return TrataResposta(response, "Put");
-                }
-                catch (Exception ex)
-                {
-                    return new RequestResultModel(StatusResult.Danger, new MessageModel($"Erro ao atualizar dados:{ex.Message}"));
-                }
+                var response = client.PutAsync(GetAddress(controler, metodo), GetByteArrayContent(objeto)).Result;
+                return TrataResposta(response, "Put");
+            }
+            catch (Exception ex)
+            {
+                return new RequestResultModel(StatusResult.Danger, new MessageModel($"Erro ao atualizar dados:{ex.Message}"));
             }
         }
 
         public RequestResultModel OnDelete(string controler, string metodo = null, string[] parametros = null)
         {
-            using (var client = MakeHttpClient())
+            using var client = MakeHttpClient();
+            try
             {
-                try
-                {
-                    var response = client.DeleteAsync(GetAddress(controler, metodo, parametros)).Result;
-                    return TrataResposta(response, "Delete");
-                }
-                catch (Exception ex)
-                {
-                    return new RequestResultModel(StatusResult.Danger, new MessageModel($"Erro ao excluir dados:{ex.Message}."));
-                }
+                var response = client.DeleteAsync(GetAddress(controler, metodo, parametros)).Result;
+                return TrataResposta(response, "Delete");
+            }
+            catch (Exception ex)
+            {
+                return new RequestResultModel(StatusResult.Danger, new MessageModel($"Erro ao excluir dados:{ex.Message}."));
             }
         }
 
         private string GetAddress(string controler, string metodo = null, string[] parametros = null)
         {
-
-            string Address = $"{controler}";
+            var Address = $"{controler}";
 
             if (metodo != null)
             {
@@ -129,13 +120,13 @@ namespace Curso.CrossCutting.Uteis
 
             client.BaseAddress = new Uri(UrlBase);
 
-            //if (passaBearer)
-            //{
-            //    if (UsuarioLogado.AccessToken != null)
-            //    {
-            //        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UsuarioLogado.AccessToken);
-            //    }
-            //}
+            if (passaBearer)
+            {
+                //if (UsuarioLogado.AccessToken != null)
+                //{
+                //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", UsuarioLogado.AccessToken);
+                //}
+            }
 
             if (fullClient)
             {
@@ -190,18 +181,22 @@ namespace Curso.CrossCutting.Uteis
                 }
                 catch (Exception ex)
                 {
-                    RequestResultModel res = new RequestResultModel();
-                    res.Data = null;
-                    res.Status = StatusResult.Danger;
+                    RequestResultModel res = new RequestResultModel
+                    {
+                        Data = null,
+                        Status = StatusResult.Danger
+                    };
                     res.Messages.Add(new MessageModel($"Falha na recuperação dos dados:{ex.Message}"));
                     return res;
                 }
             }
             else
             {
-                RequestResultModel res = new RequestResultModel();
-                res.Data = null;
-                res.Status = StatusResult.Danger;
+                RequestResultModel res = new RequestResultModel
+                {
+                    Data = null,
+                    Status = StatusResult.Danger
+                };
                 res.Messages.Add(new MessageModel("Falha na recuperação dos dados, resposta da API não estava em formato correto."));
                 return res;
             }

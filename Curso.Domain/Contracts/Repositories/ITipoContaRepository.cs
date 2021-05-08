@@ -6,6 +6,6 @@ namespace Curso.Domain.Contracts.Repositories
 {
     public interface ITipoContaRepository : IBaseReposiory<TipoConta>
     {
-  
+
     }
 }

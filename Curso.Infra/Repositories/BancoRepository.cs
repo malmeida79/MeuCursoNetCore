@@ -15,7 +15,7 @@ namespace Curso.Infra.Repositories
         public BancoRepository()
         {
 
-        }       
+        }
 
     }
 }

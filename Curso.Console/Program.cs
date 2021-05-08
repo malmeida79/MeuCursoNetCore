@@ -1,6 +1,6 @@
-﻿using Primeiro.Controllers;
-using Curso.Domain.Entities;
+﻿using Curso.Domain.Entities;
 using Curso.Domain.Enuns;
+using Primeiro.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -2,7 +2,7 @@
 
 namespace Curso.Domain.Entities
 {
-    public class Cliente: BaseEntity
+    public class Cliente : BaseEntity
     {
         public int CodCliente { get; set; }
         public string NomeCliente { get; set; }

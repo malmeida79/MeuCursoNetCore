@@ -5,11 +5,11 @@ using Curso.Services.Base;
 
 namespace Curso.Services
 {
-    public class TipoContaService : BaseService<TipoConta>,ITipoContaService
+    public class TipoContaService : BaseService<TipoConta>, ITipoContaService
     {
         private readonly ITipoContaRepository _tipoConta;
 
-        public TipoContaService(ITipoContaRepository tipoConta):base(tipoConta)
+        public TipoContaService(ITipoContaRepository tipoConta) : base(tipoConta)
         {
             _tipoConta = tipoConta;
         }

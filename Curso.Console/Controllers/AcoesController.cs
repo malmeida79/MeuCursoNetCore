@@ -64,11 +64,11 @@ namespace Primeiro.Controllers
             return retorno;
         }
 
-        public bool Pix(ref ContaCorrente conta,decimal valor, EnumTipoPix tipoOperacao, EnumChavePix chave)
+        public bool Pix(ref ContaCorrente conta, decimal valor, EnumTipoPix tipoOperacao, EnumChavePix chave)
         {
             bool retorno = false;
 
-            if (ConsultaSaldo(conta,valor))
+            if (ConsultaSaldo(conta, valor))
             {
                 if (tipoOperacao == EnumTipoPix.Saque)
                 {
