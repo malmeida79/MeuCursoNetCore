@@ -11,7 +11,6 @@ namespace Curso.API.Controllers
         [HttpGet]
         public string Get()
         {
-            var rng = new Random();
             return "[OK - Rodando]";
         }
     }

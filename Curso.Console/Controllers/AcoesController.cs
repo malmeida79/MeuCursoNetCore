@@ -64,7 +64,7 @@ namespace Primeiro.Controllers
             return retorno;
         }
 
-        public bool Pix(ref ContaCorrente conta, decimal valor, EnumTipoPix tipoOperacao, EnumChavePix chave)
+        public bool Pix(ref ContaCorrente conta, decimal valor, EnumTipoPix tipoOperacao)
         {
             bool retorno = false;
 

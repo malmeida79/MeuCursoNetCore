@@ -29,6 +29,7 @@ namespace Curso.UI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
             this.mnuBar = new System.Windows.Forms.MenuStrip();
             this.mnuCadastro = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +49,13 @@ namespace Curso.UI
             this.mnuAjuda = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSobre = new System.Windows.Forms.ToolStripMenuItem();
             this.stsBar = new System.Windows.Forms.StatusStrip();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuFecharTodos = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolContaInvestimento = new System.Windows.Forms.ToolStripButton();
             this.mnuBar.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnuBar
@@ -61,8 +68,7 @@ namespace Curso.UI
             this.mnuBar.Location = new System.Drawing.Point(0, 0);
             this.mnuBar.MdiWindowListItem = this.mnuJanela;
             this.mnuBar.Name = "mnuBar";
-            this.mnuBar.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
-            this.mnuBar.Size = new System.Drawing.Size(1143, 35);
+            this.mnuBar.Size = new System.Drawing.Size(800, 24);
             this.mnuBar.TabIndex = 1;
             this.mnuBar.Text = "menuStrip1";
             // 
@@ -77,28 +83,29 @@ namespace Curso.UI
             this.toolStripSeparator2,
             this.mnuSair});
             this.mnuCadastro.Name = "mnuCadastro";
-            this.mnuCadastro.Size = new System.Drawing.Size(107, 29);
+            this.mnuCadastro.Size = new System.Drawing.Size(71, 20);
             this.mnuCadastro.Text = "Cadastros";
             this.mnuCadastro.ToolTipText = "Cadastros em geral";
             // 
             // mnuBancos
             // 
             this.mnuBancos.Name = "mnuBancos";
-            this.mnuBancos.Size = new System.Drawing.Size(175, 34);
+            this.mnuBancos.Size = new System.Drawing.Size(135, 22);
             this.mnuBancos.Text = "Bancos";
-            this.mnuBancos.Click += new System.EventHandler(this.mnuBancos_Click);
+            this.mnuBancos.Click += new System.EventHandler(this.MnuBancos_Click);
             // 
             // mnuClientes
             // 
             this.mnuClientes.Name = "mnuClientes";
-            this.mnuClientes.Size = new System.Drawing.Size(175, 34);
+            this.mnuClientes.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.mnuClientes.Size = new System.Drawing.Size(135, 22);
             this.mnuClientes.Text = "Clientes";
-            this.mnuClientes.Click += new System.EventHandler(this.mnuClientes_Click);
+            this.mnuClientes.Click += new System.EventHandler(this.MnuClientes_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(172, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(132, 6);
             // 
             // mnuContas
             // 
@@ -107,41 +114,41 @@ namespace Curso.UI
             this.mnuCI,
             this.mnuTipoConta});
             this.mnuContas.Name = "mnuContas";
-            this.mnuContas.Size = new System.Drawing.Size(175, 34);
+            this.mnuContas.Size = new System.Drawing.Size(135, 22);
             this.mnuContas.Text = "Contas";
             // 
             // mnuCC
             // 
             this.mnuCC.Name = "mnuCC";
-            this.mnuCC.Size = new System.Drawing.Size(269, 34);
+            this.mnuCC.Size = new System.Drawing.Size(178, 22);
             this.mnuCC.Text = "Conta Corrente";
-            this.mnuCC.Click += new System.EventHandler(this.mnuCC_Click);
+            this.mnuCC.Click += new System.EventHandler(this.MnuCC_Click);
             // 
             // mnuCI
             // 
             this.mnuCI.Name = "mnuCI";
-            this.mnuCI.Size = new System.Drawing.Size(269, 34);
+            this.mnuCI.Size = new System.Drawing.Size(178, 22);
             this.mnuCI.Text = "Conta Investimento";
-            this.mnuCI.Click += new System.EventHandler(this.mnuCI_Click);
+            this.mnuCI.Click += new System.EventHandler(this.MnuCI_Click);
             // 
             // mnuTipoConta
             // 
             this.mnuTipoConta.Name = "mnuTipoConta";
-            this.mnuTipoConta.Size = new System.Drawing.Size(269, 34);
+            this.mnuTipoConta.Size = new System.Drawing.Size(178, 22);
             this.mnuTipoConta.Text = "Tipo Conta";
-            this.mnuTipoConta.Click += new System.EventHandler(this.mnuTipoConta_Click);
+            this.mnuTipoConta.Click += new System.EventHandler(this.MnuTipoConta_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(172, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(132, 6);
             // 
             // mnuSair
             // 
             this.mnuSair.Name = "mnuSair";
-            this.mnuSair.Size = new System.Drawing.Size(175, 34);
+            this.mnuSair.Size = new System.Drawing.Size(135, 22);
             this.mnuSair.Text = "Sair";
-            this.mnuSair.Click += new System.EventHandler(this.mnuSair_Click);
+            this.mnuSair.Click += new System.EventHandler(this.MnuSair_Click);
             // 
             // mnuJanela
             // 
@@ -150,72 +157,110 @@ namespace Curso.UI
             this.mnuVertical,
             this.mnuCascata});
             this.mnuJanela.Name = "mnuJanela";
-            this.mnuJanela.Size = new System.Drawing.Size(83, 29);
+            this.mnuJanela.Size = new System.Drawing.Size(56, 20);
             this.mnuJanela.Text = "Janelas";
             // 
             // mnuHorizontal
             // 
             this.mnuHorizontal.Name = "mnuHorizontal";
-            this.mnuHorizontal.Size = new System.Drawing.Size(196, 34);
+            this.mnuHorizontal.Size = new System.Drawing.Size(129, 22);
             this.mnuHorizontal.Text = "Horizontal";
-            this.mnuHorizontal.Click += new System.EventHandler(this.mnuHorizontal_Click);
+            this.mnuHorizontal.Click += new System.EventHandler(this.MnuHorizontal_Click);
             // 
             // mnuVertical
             // 
             this.mnuVertical.Name = "mnuVertical";
-            this.mnuVertical.Size = new System.Drawing.Size(196, 34);
+            this.mnuVertical.Size = new System.Drawing.Size(129, 22);
             this.mnuVertical.Text = "Vertical";
-            this.mnuVertical.Click += new System.EventHandler(this.mnuVertical_Click);
+            this.mnuVertical.Click += new System.EventHandler(this.MnuVertical_Click);
             // 
             // mnuCascata
             // 
             this.mnuCascata.Name = "mnuCascata";
-            this.mnuCascata.Size = new System.Drawing.Size(196, 34);
+            this.mnuCascata.Size = new System.Drawing.Size(129, 22);
             this.mnuCascata.Text = "Cascata";
-            this.mnuCascata.Click += new System.EventHandler(this.mnuCascata_Click);
+            this.mnuCascata.Click += new System.EventHandler(this.MnuCascata_Click);
             // 
             // mnuAjuda
             // 
             this.mnuAjuda.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuSobre});
             this.mnuAjuda.Name = "mnuAjuda";
-            this.mnuAjuda.Size = new System.Drawing.Size(74, 29);
+            this.mnuAjuda.Size = new System.Drawing.Size(50, 20);
             this.mnuAjuda.Text = "Ajuda";
             // 
             // mnuSobre
             // 
             this.mnuSobre.Name = "mnuSobre";
-            this.mnuSobre.Size = new System.Drawing.Size(161, 34);
+            this.mnuSobre.Size = new System.Drawing.Size(104, 22);
             this.mnuSobre.Text = "Sobre";
-            this.mnuSobre.Click += new System.EventHandler(this.mnuSobre_Click);
+            this.mnuSobre.Click += new System.EventHandler(this.MnuSobre_Click);
             // 
             // stsBar
             // 
             this.stsBar.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.stsBar.Location = new System.Drawing.Point(0, 728);
+            this.stsBar.Location = new System.Drawing.Point(0, 427);
             this.stsBar.Name = "stsBar";
-            this.stsBar.Padding = new System.Windows.Forms.Padding(1, 0, 20, 0);
-            this.stsBar.Size = new System.Drawing.Size(1143, 22);
+            this.stsBar.Size = new System.Drawing.Size(800, 22);
             this.stsBar.TabIndex = 3;
             this.stsBar.Text = "statusStrip1";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuFecharTodos});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(143, 26);
+            // 
+            // mnuFecharTodos
+            // 
+            this.mnuFecharTodos.Name = "mnuFecharTodos";
+            this.mnuFecharTodos.Size = new System.Drawing.Size(142, 22);
+            this.mnuFecharTodos.Text = "Fechar todos";
+            this.mnuFecharTodos.Click += new System.EventHandler(this.MnuFecharTodos_Click);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.ContextMenuStrip = this.contextMenuStrip1;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolContaInvestimento});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(800, 25);
+            this.toolStrip1.TabIndex = 5;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolContaInvestimento
+            // 
+            this.toolContaInvestimento.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolContaInvestimento.Image = ((System.Drawing.Image)(resources.GetObject("toolContaInvestimento.Image")));
+            this.toolContaInvestimento.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolContaInvestimento.Name = "toolContaInvestimento";
+            this.toolContaInvestimento.Size = new System.Drawing.Size(23, 22);
+            this.toolContaInvestimento.Text = "Conta investimento";
+            this.toolContaInvestimento.Click += new System.EventHandler(this.ToolContaInvestimento_Click);
+            // 
             // FrmPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1143, 750);
+            this.ClientSize = new System.Drawing.Size(800, 449);
+            this.ContextMenuStrip = this.contextMenuStrip1;
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.stsBar);
             this.Controls.Add(this.mnuBar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mnuBar;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FrmPrincipal";
             this.Text = ":: Sistema Bancário ::";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.mnuBar.ResumeLayout(false);
             this.mnuBar.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,5 +286,9 @@ namespace Curso.UI
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem mnuAjuda;
         private System.Windows.Forms.ToolStripMenuItem mnuSobre;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem mnuFecharTodos;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolContaInvestimento;
     }
 }

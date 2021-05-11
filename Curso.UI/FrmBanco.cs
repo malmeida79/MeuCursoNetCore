@@ -28,7 +28,7 @@ namespace Curso.UI
             GetBancos();
         }
 
-        private void cmbBancos_SelectedIndexChanged(object sender, EventArgs e)
+        private void CmbBancos_SelectedIndexChanged(object sender, EventArgs e)
         {
             bcoSel = listaBancos.Find(x => x.CodBanco == Convert.ToInt32(cmbBancos.SelectedValue.ToString()));
             if (bcoSel != null)
@@ -38,7 +38,7 @@ namespace Curso.UI
             }
         }
 
-        private void btnFechar_Click(object sender, EventArgs e)
+        private void BtnFechar_Click(object sender, EventArgs e)
         {
             var retorno = Msgs.Confirma("Deseja realmente fechar?", ":: Fechar ::");
             if (retorno == DialogResult.Yes)
@@ -47,7 +47,7 @@ namespace Curso.UI
             }
         }
 
-        private void btnSalvar_Click(object sender, EventArgs e)
+        private void BtnSalvar_Click(object sender, EventArgs e)
         {
             if (ValidaBanco())
             {
@@ -111,7 +111,7 @@ namespace Curso.UI
             }
         }
 
-        private void btnNovoBanco_Click(object sender, EventArgs e)
+        private void BtnNovoBanco_Click(object sender, EventArgs e)
         {
             if (btnNovoBanco.Text != "Cancelar")
             {
@@ -159,7 +159,7 @@ namespace Curso.UI
             return retorno;
         }
 
-        private void btnExcluir_Click(object sender, EventArgs e)
+        private void BtnExcluir_Click(object sender, EventArgs e)
         {
             var retorno = Msgs.Confirma("Deseja realmente excluir?");
             if (retorno == DialogResult.Yes)

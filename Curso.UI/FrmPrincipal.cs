@@ -20,7 +20,7 @@ namespace Curso.UI
 
         }
 
-        private void mnuSair_Click(object sender, EventArgs e)
+        private void MnuSair_Click(object sender, EventArgs e)
         {
             if (Msgs.Confirma("Deseja encerrar?") == DialogResult.Yes)
             {
@@ -28,90 +28,95 @@ namespace Curso.UI
             }
         }
 
-        private void mnuClientes_Click(object sender, EventArgs e)
+        private void MnuClientes_Click(object sender, EventArgs e)
         {
             if (ChildISOpen("FrmCliente"))
             {
                 return;
             }
 
-            FrmCliente frm = new FrmCliente();
-            frm.MdiParent = this;
+            FrmCliente frm = new FrmCliente
+            {
+                MdiParent = this
+            };
             frm.Show();
         }
 
-        private void mnuCI_Click(object sender, EventArgs e)
+        private void MnuCI_Click(object sender, EventArgs e)
         {
             if (ChildISOpen("FrmContaInvestimento"))
             {
                 return;
             }
 
-            FrmContaInvestimento frm = new FrmContaInvestimento();
-            frm.MdiParent = this;
+            FrmContaInvestimento frm = new FrmContaInvestimento
+            {
+                MdiParent = this
+            };
             frm.Show();
         }
 
-        private void mnuCC_Click(object sender, EventArgs e)
+        private void MnuCC_Click(object sender, EventArgs e)
         {
             if (ChildISOpen("FrmContaCorrente"))
             {
                 return;
             }
 
-            FrmContaCorrente frm = new FrmContaCorrente();
-            frm.MdiParent = this;
+            FrmContaCorrente frm = new FrmContaCorrente
+            {
+                MdiParent = this
+            };
             frm.Show();
         }
 
-        private void mnuBancos_Click(object sender, EventArgs e)
+        private void MnuBancos_Click(object sender, EventArgs e)
         {
             if (ChildISOpen("FmrBanco"))
             {
                 return;
             }
 
-            FrmBanco frm = new FrmBanco(_web);
-            frm.MdiParent = this;
+            FrmBanco frm = new FrmBanco(_web)
+            {
+                MdiParent = this
+            };
             frm.Show();
         }
 
-        private void mnuTipoConta_Click(object sender, EventArgs e)
+        private void MnuTipoConta_Click(object sender, EventArgs e)
         {
             if (ChildISOpen("FrmTipoConta"))
             {
                 return;
             }
 
-            FrmTipoConta frm = new FrmTipoConta();
-            frm.MdiParent = this;
+            FrmTipoConta frm = new FrmTipoConta
+            {
+                MdiParent = this
+            };
             frm.Show();
 
         }
 
-        private void mnuSobre_Click(object sender, EventArgs e)
+        private void MnuSobre_Click(object sender, EventArgs e)
         {
-            if (ChildISOpen("FrmSobre"))
-            {
-                return;
-            }
 
             FrmSobre frm = new FrmSobre();
-            frm.MdiParent = this;
-            frm.Show();
+            frm.ShowDialog();
         }
 
-        private void mnuHorizontal_Click(object sender, EventArgs e)
+        private void MnuHorizontal_Click(object sender, EventArgs e)
         {
             this.LayoutMdi(MdiLayout.TileHorizontal);
         }
 
-        private void mnuVertical_Click(object sender, EventArgs e)
+        private void MnuVertical_Click(object sender, EventArgs e)
         {
             this.LayoutMdi(MdiLayout.TileVertical);
         }
 
-        private void mnuCascata_Click(object sender, EventArgs e)
+        private void MnuCascata_Click(object sender, EventArgs e)
         {
             this.LayoutMdi(MdiLayout.Cascade);
         }
@@ -134,7 +139,6 @@ namespace Curso.UI
 
         private bool FormISOpen(string formName)
         {
-
             bool retorno = false;
 
             FormCollection fc = Application.OpenForms;
@@ -150,6 +154,17 @@ namespace Curso.UI
             return retorno;
         }
 
+        private void MnuFecharTodos_Click(object sender, EventArgs e)
+        {
+            foreach (Form child in this.MdiChildren)
+            {
+                child.Close();
+            }
+        }
 
+        private void ToolContaInvestimento_Click(object sender, EventArgs e)
+        {
+            MnuCI_Click(sender, e);
+        }
     }
 }

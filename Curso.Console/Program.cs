@@ -16,27 +16,33 @@ namespace Primeiro
             // criando as contas (instanciando as contas)
             AcoesController acao = new AcoesController();
 
-            ContaInvestimento ccInvest = new ContaInvestimento();
-            ccInvest.Chave = "xhyj-yut-123-pou";
-            ccInvest.Saldo = 3000;
-            ccInvest.TaxaAdm = 2;
+            ContaInvestimento ccInvest = new ContaInvestimento
+            {
+                Chave = "xhyj-yut-123-pou",
+                Saldo = 3000,
+                TaxaAdm = 2
+            };
 
 
             //  instanciando classe fazendo uso do construtor
-            ContaCorrente ccCliente = new ContaCorrente();
-            ccCliente.NumeroConta = "12345";
-            ccCliente.NumeroAgencia = "43";
-            ccCliente.Saldo = 100;
-            ccCliente.Limite = 350;
-            ccCliente.TipoConta = EnumTipoConta.Conjunta;
+            ContaCorrente ccCliente = new ContaCorrente
+            {
+                NumeroConta = "12345",
+                NumeroAgencia = "43",
+                Saldo = 100,
+                Limite = 350,
+                TipoConta = EnumTipoConta.Conjunta
+            };
 
             // simplesmente instanciando classes com construtor simples
-            ContaCorrente conta = new ContaCorrente();
-            conta.NumeroConta = "56789";
-            conta.NumeroAgencia = "86";
-            conta.Saldo = 300;
-            conta.Limite = 200;
-            conta.TipoConta = EnumTipoConta.Digital;
+            ContaCorrente conta = new ContaCorrente
+            {
+                NumeroConta = "56789",
+                NumeroAgencia = "86",
+                Saldo = 300,
+                Limite = 200,
+                TipoConta = EnumTipoConta.Digital
+            };
 
             acao.Saque(ref ccInvest, 300);
 
@@ -80,7 +86,7 @@ namespace Primeiro
             acao.Pagamento(ref conta, 50);
 
             // utilizando enuns
-            acao.Pix(ref conta, 100, EnumTipoPix.Pagamento, EnumChavePix.Cpf);
+            acao.Pix(ref conta, 100, EnumTipoPix.Pagamento);
 
             // saldo atual
             var saldo = ccCliente.Saldo;
@@ -94,13 +100,14 @@ namespace Primeiro
             #region Area Listas Simples
 
             // declarando a lista
-            var nomes = new List<string>();
-
-            // adicionando itens na lista
-            nomes.Add("Marcos");
-            nomes.Add("Matheus");
-            nomes.Add("Mary");
-            nomes.Add("Jhonny");
+            var nomes = new List<string>
+            {
+                // adicionando itens na lista
+                "Marcos",
+                "Matheus",
+                "Mary",
+                "Jhonny"
+            };
 
             // segue apenas se tivermos nomes na lista
             if (nomes.Count > 0)
@@ -144,17 +151,23 @@ namespace Primeiro
 
             var bc = new List<Banco>();
 
-            var bc1 = new Banco();
-            bc1.CodBanco = 1;
-            bc1.NomeBanco = "Banco do Brasil";
+            var bc1 = new Banco
+            {
+                CodBanco = 1,
+                NomeBanco = "Banco do Brasil"
+            };
 
-            var bc2 = new Banco();
-            bc2.CodBanco = 341;
-            bc2.NomeBanco = "Itau";
+            var bc2 = new Banco
+            {
+                CodBanco = 341,
+                NomeBanco = "Itau"
+            };
 
-            var bc3 = new Banco();
-            bc3.CodBanco = 237;
-            bc3.NomeBanco = "Banco Bradesco";
+            var bc3 = new Banco
+            {
+                CodBanco = 237,
+                NomeBanco = "Banco Bradesco"
+            };
 
             bc.Add(bc1);
             bc.Add(bc2);

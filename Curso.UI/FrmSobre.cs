@@ -99,5 +99,10 @@ namespace Curso.UI
             }
         }
         #endregion
+
+        private void FrmSobre_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
