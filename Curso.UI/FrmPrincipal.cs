@@ -17,9 +17,10 @@ namespace Curso.UI
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
-
+            this.Text = $"{this.Text} - {DateTime.Now.ToString("dd/MM/yyyy") }";
         }
 
+        #region Menus
         private void MnuSair_Click(object sender, EventArgs e)
         {
             if (Msgs.Confirma("Deseja encerrar?") == DialogResult.Yes)
@@ -121,6 +122,50 @@ namespace Curso.UI
             this.LayoutMdi(MdiLayout.Cascade);
         }
 
+        #endregion
+
+        #region Menu Contexto
+
+        private void MnuFecharTodos_Click(object sender, EventArgs e)
+        {
+            foreach (Form child in this.MdiChildren)
+            {
+                child.Close();
+            }
+        }
+
+        #endregion
+
+        #region Toolbar
+
+        private void ToolContaInvestimento_Click(object sender, EventArgs e)
+        {
+            MnuCI_Click(sender, e);
+        }
+        private void ToolClientes_Click(object sender, EventArgs e)
+        {
+            MnuClientes_Click(sender, e);
+        }
+
+        private void ToolContaCorrente_Click(object sender, EventArgs e)
+        {
+            MnuCC_Click(sender, e);
+        }
+
+        private void ToolTipoConta_Click(object sender, EventArgs e)
+        {
+            MnuTipoConta_Click(sender, e);
+        }
+
+        private void ToolBancos_Click(object sender, EventArgs e)
+        {
+            MnuBancos_Click(sender, e);
+        }
+
+        #endregion
+
+        #region Internos
+
         private bool ChildISOpen(string formName)
         {
             bool retorno = false;
@@ -154,17 +199,6 @@ namespace Curso.UI
             return retorno;
         }
 
-        private void MnuFecharTodos_Click(object sender, EventArgs e)
-        {
-            foreach (Form child in this.MdiChildren)
-            {
-                child.Close();
-            }
-        }
-
-        private void ToolContaInvestimento_Click(object sender, EventArgs e)
-        {
-            MnuCI_Click(sender, e);
-        }
+        #endregion
     }
 }
