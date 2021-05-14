@@ -1,0 +1,16 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Curso.UI.Web.Controllers
+{
+    public class ContaCorrenteController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+    }
+}

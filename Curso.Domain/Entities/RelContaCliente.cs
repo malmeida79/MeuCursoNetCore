@@ -11,6 +11,5 @@ namespace Curso.Domain.Entities
         public string NomeCliente { get; set; }
         public DateTime DataAbertura { get; set; }
         public string NomeBanco { get; set; }
-        public string NomeTipoConta { get; set; }
     }
 }

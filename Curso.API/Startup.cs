@@ -38,14 +38,12 @@ namespace Curso.API
             services.AddSingleton<IHelperWeb, HelperWeb>();
             services.AddTransient<IBancoService, BancoService>();
             services.AddTransient<IClienteService, ClienteService>();
-            services.AddTransient<ITipoContaService, TipoContaService>();
             services.AddTransient<IContaCorrenteService, ContaCorrenteService>();
             services.AddTransient<IContaInvestimentoService, ContaInvestimentoService>();
             services.AddTransient<IRelContaClienteService, RelContaClienteService>();
 
             services.AddTransient<IBancoRepository, BancoRepository>();
             services.AddTransient<IClienteRepository, ClienteRepository>();
-            services.AddTransient<ITipoContaRepository, TipoContaRepository>();
             services.AddTransient<IContaCorrenteRepository, ContaCorrenteRepository>();
             services.AddTransient<IContaInvestimentoRepository, ContaInvestimentoRepository>();
             services.AddTransient<IRelContaClienteRepository, RelContaClienteRepository>();

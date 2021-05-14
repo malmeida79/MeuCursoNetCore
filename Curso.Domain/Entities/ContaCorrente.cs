@@ -15,8 +15,5 @@ namespace Curso.Domain.Entities
         public int CodContaCorrente { get; set; }
         public DateTime DataAbertura { get; set; }
         public Banco Banco { get; set; }
-
-        [NotMapped]
-        public EnumTipoConta TipoConta { get; set; }
     }
 }

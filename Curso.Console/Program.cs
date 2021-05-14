@@ -30,8 +30,7 @@ namespace Primeiro
                 NumeroConta = "12345",
                 NumeroAgencia = "43",
                 Saldo = 100,
-                Limite = 350,
-                TipoConta = EnumTipoConta.Conjunta
+                Limite = 350
             };
 
             // simplesmente instanciando classes com construtor simples
@@ -40,8 +39,7 @@ namespace Primeiro
                 NumeroConta = "56789",
                 NumeroAgencia = "86",
                 Saldo = 300,
-                Limite = 200,
-                TipoConta = EnumTipoConta.Digital
+                Limite = 200
             };
 
             acao.Saque(ref ccInvest, 300);

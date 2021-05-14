@@ -85,21 +85,6 @@ namespace Curso.UI
             frm.Show();
         }
 
-        private void MnuTipoConta_Click(object sender, EventArgs e)
-        {
-            if (ChildISOpen("FrmTipoConta"))
-            {
-                return;
-            }
-
-            FrmTipoConta frm = new FrmTipoConta
-            {
-                MdiParent = this
-            };
-            frm.Show();
-
-        }
-
         private void MnuSobre_Click(object sender, EventArgs e)
         {
 
@@ -150,11 +135,6 @@ namespace Curso.UI
         private void ToolContaCorrente_Click(object sender, EventArgs e)
         {
             MnuCC_Click(sender, e);
-        }
-
-        private void ToolTipoConta_Click(object sender, EventArgs e)
-        {
-            MnuTipoConta_Click(sender, e);
         }
 
         private void ToolBancos_Click(object sender, EventArgs e)
