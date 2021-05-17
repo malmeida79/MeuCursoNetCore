@@ -1,7 +1,5 @@
 ﻿using Curso.Domain.Entities.Base;
-using Curso.Domain.Enuns;
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Curso.Domain.Entities
 {

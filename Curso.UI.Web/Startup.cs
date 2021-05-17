@@ -1,13 +1,11 @@
+using Curso.CrossCutting.Uteis;
+using Curso.Domain.Configs;
+using Curso.Domain.Contracts.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Curso.UI.Web
 {
@@ -22,7 +20,15 @@ namespace Curso.UI.Web
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {      
+            services.AddOptions();
+
+            // Recebendo as opções e levando para todas bibliotecas
+            services.Configure<AppSettingsConfig>(Configuration);
+      
+            services.AddHttpClient();
+            services.AddTransient<IHelperWeb, HelperWeb>();
+
             services.AddControllersWithViews();
         }
 

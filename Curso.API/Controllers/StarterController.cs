@@ -1,6 +1,5 @@
 ﻿using Curso.API.Controllers.Base;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace Curso.API.Controllers
 {

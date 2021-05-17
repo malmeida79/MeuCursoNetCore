@@ -1,12 +1,7 @@
-﻿using Curso.Domain.Entities;
-using Curso.UI.Web.Models;
+﻿using Curso.UI.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Curso.UI.Web.Controllers
 {

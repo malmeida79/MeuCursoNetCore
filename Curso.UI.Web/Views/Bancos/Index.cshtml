@@ -1,5 +1,131 @@
-﻿@{
+﻿@model Curso.Domain.Entities.Banco
+
+@{
     ViewData["Title"] = "Bancos";
     ViewData["NomePagina"] = "Cadastro de Bancos";
 }
 
+<div class="row mb-2">
+    <div class="col-2">
+        Bancos:
+    </div>
+    <div class="col-4 text-left">
+        <select class="form-control" asp-for="CodBanco" name="CodBanco" id="CodBanco" asp-items="@(new SelectList(ViewBag.bancos,"CodBanco", "NomeBanco"))"></select>
+    </div>
+</div>
+
+<script>
+
+        function modalExclui(codigo)
+        {
+            var endereco = '@Url.Action("ModalExclui", "Funcoes", new { @codExclui =-1})'.replace(-1, codigo);
+
+                $("#baseModal").load(endereco, function() {
+                    $("#baseModal").modal();
+            });
+        }
+
+        function modalEdita(codigo)
+        {
+            var endereco = '@Url.Action("ModalEdita", "Projetos", new { @codEdita =-1})'.replace(-1, codigo);
+
+                $("#baseModal").load(endereco, function() {
+                    $("#baseModal").modal();
+            });
+        }
+
+        function modalNovo()
+        {
+            var endereco = '@Url.Action("ModalNovo", "Projetos")';
+
+                $("#baseModal").load(endereco, function() {
+                    $("#baseModal").modal();
+            });
+        }
+
+        function salvarAlteracao()
+        {
+                $.ajax({
+                type: 'POST',
+                    url: '@Url.Action("SalvarAlteracao", "Projetos")',
+                    data: $('#frmEdita').serialize(),
+                    success: function(response) {
+                    if (response.error)
+                    {
+                        toastr.error(response.message);
+                        return;
+                    }
+
+                    toastr.success(response.message);
+
+                        $("#baseModal").modal('hide');
+
+                    sleep(1500).then(() =>
+                    {
+                        window.location.reload();
+                    });
+                },
+                    error: function(response) {
+                    toastr.error(response.message);
+                }
+            });
+        }
+
+        function salvarNovo()
+        {
+                $.ajax({
+                type: 'POST',
+                    url: '@Url.Action("SalvarNovo", "Projetos")',
+                    data: $('#frmNovo').serialize(),
+                    success: function(response) {
+                    if (response.error)
+                    {
+                        toastr.error(response.message);
+                        return;
+                    }
+
+                    toastr.success(response.message);
+
+                        $("#baseModal").modal('hide');
+
+                    sleep(1500).then(() =>
+                    {
+                        window.location.reload();
+                    });
+                },
+                    error: function(response) {
+                    toastr.error(response.message);
+                }
+            });
+        }
+
+        function excluir()
+        {
+
+                $.ajax({
+                type: 'POST',
+                    url: '@Url.Action("Excluir", "Projetos")',
+                    data: $('#frmExclui').serialize(),
+                    success: function(response) {
+                    if (response.error)
+                    {
+                        toastr.error(response.message);
+                        return;
+                    }
+
+                    toastr.success(response.message);
+
+                        $("#baseModal").modal('hide');
+
+                    sleep(1500).then(() =>
+                    {
+                        window.location.reload();
+                    });
+                },
+                    error: function(response) {
+                    toastr.error(response.message);
+                }
+            });
+        }
+
+</script>

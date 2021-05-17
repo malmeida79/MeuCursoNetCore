@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "Novo";
+}
+
+<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="tituloItem">Novo banco</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <form name="frmNovo" id="frmNovo" method="post">
+            <div class="modal-body">
+                <div class="container-fluid pt-3">
+                    @*<div class="row mb-2">
+                            <div class="col-2">
+                                Nome Projeto:
+                            </div>
+                            <div class="col-10 text-left">
+                                <input type="text" class="form-control" id="descricao" name="descricao" value="">
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                Tipo Projeto:
+                            </div>
+                            <div class="col-10 text-left">
+                                <select class="form-control" name="tipo" id="tipo" asp-items="@(new SelectList(ViewBag.tipos,"TipoProjetoKey", "TipoProjetoDescricao"))"></select>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                Situação Projeto:
+                            </div>
+                            <div class="col-10 text-left">
+                                <select class="form-control" name="situacao" id="situacao" asp-items="@(new SelectList(ViewBag.situacoes,"SituacaoProjetoKey", "SituacaoProjetoDescricao"))"></select>
+                            </div>
+                        </div>*@
+                    <div class="modal-footer mt-2">
+                        <button type="button" class="btn btn-primary" onclick="salvarNovo()">Salvar</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

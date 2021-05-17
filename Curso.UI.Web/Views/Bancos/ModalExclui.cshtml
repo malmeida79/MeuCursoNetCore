@@ -1,0 +1,30 @@
+﻿@model int;
+@{
+    Layout = null;
+    ViewBag.Title = "Excluir";
+}
+
+<div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="tituloItem">Excluir banco</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <form name="frmExclui" id="frmExclui" method="post">
+            <div class="modal-body">
+                <div class="container-fluid pt-3">
+                    Deseja realmente excluir esse banco?
+                    <input type="hidden" name="idExclui" id="idExclui" value="@Model" />
+                    <br />
+                    <div class="modal-footer mt-2">
+                        <button type="button" class="btn btn-danger" onclick="excluir()">Excluir</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
