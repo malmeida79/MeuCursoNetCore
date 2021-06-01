@@ -5,14 +5,9 @@
     ViewData["NomePagina"] = "Cadastro de Bancos";
 }
 
-<div class="row mb-2">
-    <div class="col-2">
-        Bancos:
-    </div>
-    <div class="col-4 text-left">
-        <select class="form-control" asp-for="CodBanco" name="CodBanco" id="CodBanco" asp-items="@(new SelectList(ViewBag.bancos,"CodBanco", "NomeBanco"))" onchange="modalEdita(this.value);"></select>
-    </div>
-</div>
+<br />
+
+@await Component.InvokeAsync("DataTables", new { caminhoAjax = "Bancos/AjaxHandler", colunas = ViewBag.colunas, configs = ViewBag.config })
 
 <script>
 

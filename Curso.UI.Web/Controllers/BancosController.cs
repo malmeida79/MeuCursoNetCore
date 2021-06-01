@@ -3,6 +3,9 @@ using Curso.Domain.Containers;
 using Curso.Domain.Contracts.Helpers;
 using Curso.Domain.Entities;
 using Curso.Domain.Enuns;
+using Curso.Domain.Model;
+using Curso.UI.Web.Uteis;
+using Curso.UI.Web.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -28,6 +31,27 @@ namespace Curso.UI.Web.Controllers
         public IActionResult Index()
         {
             ViewBag.bancos = GetBancos();
+
+            List<JSDataTableColum> colunas = new List<JSDataTableColum>
+            {
+                new JSDataTableColum() { Data = "codBanco", Name = "codBanco", Title = "Código" },
+                new JSDataTableColum() { Data = "nomeBanco", Name = "nomeBanco", Title = "Banco" },
+                new JSDataTableColum() { Data = "numeroBanco", Name = "numeroBanco", Title = "Número" },
+            };
+
+            ViewBag.colunas = colunas;
+
+            JSDataTableConfig config = new JSDataTableConfig
+            {
+                AtivaPesquisa = false,
+                ExibeEdit = true,
+                CustomEdit = "<a href='#' onclick='modalEdita(\" + row[\"codBanco\"] + \");'>Editar</a>",
+                ExibeDelete = true,
+                CustomDelete = "<a href='#' onclick='modalExclui(\" + row[\"codBanco\"] + \");'>Editar</a>"
+            };
+
+            ViewBag.config = config;
+
             return View();
         }
 
@@ -141,6 +165,13 @@ namespace Curso.UI.Web.Controllers
             {
                 return Json(new { error = true, message = "Ocorreu um erro! nada foi alterado." });
             }
+        }
+
+        public ActionResult AjaxHandler(DataTableAjaxPostModel dataTableModel = null)
+        {
+            var retorno = _web.OnGet<Banco>("bancos");
+
+            return Ok(HelperDataTables.GetResponse(dataTableModel, retorno, new List<string>() { "nomeBanco", "NumeroBanco" }));
         }
     }
 }

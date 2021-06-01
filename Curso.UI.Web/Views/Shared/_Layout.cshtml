@@ -40,34 +40,29 @@
         </nav>
     </header>
 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/toastr/toastr.min.js")"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
     <div class="container-fluid">
-        <main role="main" class="pb-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row mt-3 mb-3 ml-3">
-                        <div id="title-principal" class="col-md-12">
-                            <h4>@ViewData["NomePagina"]</h4>
-                        </div>
-                    </div>
 
-                    <div id="baseModal" class="modal">
-                    </div>
+        <div id="title-principal" class="col-md-12">
+            <h4>@ViewData["NomePagina"]</h4>
+        </div>
 
-                    @RenderBody()
-                    <br /><br /><br />
-                </div>
-            </div>
-        </main>
+        <div id="baseModal" class="modal">
+        </div>
+
+        @RenderBody()
+        <br /><br /><br />
     </div>
 
     <footer class="footer navbar-fixed-bottom border-top text-muted">
         <p>&copy; 2021 - Sistema Bancário</p>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="@Url.Content("~/js/toastr/toastr.min.js")"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

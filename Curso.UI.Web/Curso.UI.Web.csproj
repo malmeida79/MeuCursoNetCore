@@ -9,4 +9,11 @@
     <ProjectReference Include="..\Curso.Domain\Curso.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Uteis\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="ViewComponents\" />
+    <Folder Include="Views\Shared\Components\" />
+  </ItemGroup>
+
 </Project>

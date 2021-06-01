@@ -1,0 +1,289 @@
+﻿@{
+
+    var tablename = ViewBag.config.TableName;
+    var customDetailText = ViewBag.config.CustomDetail;
+    var customEditText = ViewBag.config.CustomEdit;
+    var customDeleteText = ViewBag.config.CustomDelete;
+    var deleteText = ViewBag.config.TextoDelete;
+    var editText = ViewBag.config.TextoEdit;
+    var detailText = ViewBag.config.TextoDetail;
+    var exibeDetail = ViewBag.config.ExibeDetail;
+    var exibeEdit = ViewBag.config.ExibeEdit;
+    var exibeDelete = ViewBag.config.ExibeDelete;
+
+    string MontaLink(bool exibe, string text, string customText, string metodo)
+    {
+        if (exibe)
+        {
+            if (!string.IsNullOrEmpty(customText))
+            {
+                return $"{customText} | ";
+            }
+            else
+            {
+                return $"<a asp-action='{metodo}' asp-route-id='-1'>{text}</a> | ";
+            }
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+}
+<link rel="stylesheet" type="text/css" href="~/lib/datatables/DataTables-1.10.20/css/dataTables.jqueryui.css" />
+<link rel="stylesheet" type="text/css" href="~/lib/datatables/Buttons-1.6.1/css/buttons.jqueryui.min.css" />
+<link rel="stylesheet" type="text/css" href="~/lib/datatables/Select-1.3.1/css/select.jqueryui.min.css" />
+<style type="text/css">
+    .btn-grid-custom {
+        margin: 0px 0px 0px 6px;
+        padding: 0px 5px 0 5px;
+        height: 28px;
+    }
+
+    .hide_column {
+        display: none;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                @if (ViewBag.config.AtivaPesquisa == true)
+                {
+                    var colunas = "col-md-12";
+
+                    @if (ViewBag.config.AtivaPesquisaStatus == true)
+                    {
+                        colunas = "col-md-10";
+                    }
+
+                    <div class="@(colunas)">
+                        <div class="form-group">
+                            <label for="pesq@(tablename)Value">Pesquisar:</label>
+                            <input type="text" class="form-control" id="pesq@(tablename)Value" />
+                        </div>
+                    </div>
+
+                    @if (ViewBag.config.AtivaPesquisaStatus == true)
+                    {
+                        <div class="col-md-2">
+                            <div class="form-check">
+                                <label for="pesqValue">Status:</label><br />
+                                <input type="Radio" name="rd@(tablename)Value" id="rd@(tablename)Value" value="Todos" /> Todos
+                                <input type="Radio" name="rd@(tablename)Value" id="rd@(tablename)Value" value="Ativo" checked /> Ativo
+                                <input type="Radio" name="rd@(tablename)Value" id="rd@(tablename)Value" value="Inativo" /> Inativo
+                            </div>
+                        </div>
+                    }
+                }
+                <table id="@(tablename)" class="table table-striped table-bordered table-hover responsive" width="100%">
+                    <thead class="thin-border-bottom"></thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" language="javascript" src="~/lib/datatables/JSZip-2.5.0/jszip.min.js"></script>
+<script type="text/javascript" language="javascript" src="~/lib/datatables/DataTables-1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="~/lib/datatables/DataTables-1.10.20/js/dataTables.jqueryui.min.js"></script>
+<script type="text/javascript" language="javascript" src="~/lib/datatables/Buttons-1.6.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" language="javascript" src="~/lib/datatables/Buttons-1.6.1/js/buttons.html5.min.js"></script>
+<script type="text/javascript" language="javascript" src="~/lib/datatables/Select-1.3.1/js/dataTables.select.min.js"></script>
+
+<script>
+
+    function trataColunaSim(dado) {
+        if (dado == "0") {
+            return "Não";
+        }
+
+        if (dado == "1") {
+            return "Sim";
+        }
+    }
+
+    function trataColunaAtivo(dado) {
+
+        if (dado == true) {
+            return "Ativo";
+        }
+
+        if (dado == false) {
+            return "Inativo";
+        }
+    }
+
+    (function ($) {
+
+        @*
+         // Usado em modo DEBUG
+         $.fn.dataTable.ext.errMode = 'throw';
+        *@
+
+        var tb@(tablename) = $("#@(tablename)")
+            .DataTable({
+                "ajax": {
+                    "url": '@Url.Action($"{ViewBag.Action}",$"{ViewBag.Controller}")',
+                    "method": "POST",
+                    @*
+                        // Ativar a linha abaixo somente para DEBUG
+                        "success": function (res) {
+                            console.log('sucess:' + JSON.stringify(res.data));
+                         }*@
+                },
+                "columns": [
+                    @*
+                     // na definição das colunas
+                     // Para não exibir a coluna basta setar o parametro visible:false
+                     // Para exibir uma custom column basta setar o hascutomcontent para true, informa nome da funcao em NomeFunctionCustomContent e conteudo em CustomContent                        *@
+                    @foreach (var item in ViewBag.colunas)
+                    {
+                        if (string.IsNullOrEmpty(item.CustomContent)) {
+                            @:{ "data": "@item.Data", "name:": "@item.Name", "title": "@item.Title", visible: ("@item.Visible" == "true" || "@item.Visible" == "") ? true : false },
+                        } else {
+                            @:{"data": "@item.Data","fnCreatedCell": function(nTd, sData, oData, iRow, iCol) { $(nTd).html("@Html.Raw(item.CustomContent)");}, "title": "@item.Title", visible: ("@item.Visible" == "true" || "@item.Visible" == "") ? true : false },
+                        }
+                    }
+
+                    @if (exibeEdit || exibeDelete || exibeDetail) {
+                    <text>
+                    {
+                        title: "Ações",
+                        orderable: false,
+                        className: "text-center",
+                        visible: true,
+                        mRender: function (data, type, row) {
+                            @{
+                                var linkDetails = MontaLink(exibeDetail, detailText, customDetailText, "TableDetail");
+                                var linkEdit = MontaLink(exibeEdit, editText, customEditText, "TableEdit");
+                                var linkDelete = MontaLink(exibeDelete, deleteText, customDeleteText, "TableDelete");
+                                var saida = linkDetails + linkEdit + linkDelete;
+
+                                if (saida.Length > 0) {
+                                    saida = saida.Substring(0, saida.Length - 2);
+                                }
+
+                                if (ViewBag.config.UsarSeparadorAcoes == false) {
+                                    saida = saida.Replace(" | ", " ");
+                                }
+                            }
+
+                           var acoes = "@Html.Raw(saida)";
+                           var value_id = row["@(ViewBag.config.CampoId)"];
+                           return acoes.replace(/-1/gi, value_id);
+                        }
+                    }
+                    </text>
+                  }
+                ],
+                @if (ViewBag.config.PermiteSelecao == true) {
+                    <text>
+                        select: {
+                        style: 'single'
+                    },
+                    </text>
+                 }
+                "dom": 'lrtipB',
+                "buttons": [
+                    {
+                        extend: 'excel',
+                        title: 'Bancos',
+                        text: 'Exportar',
+                        className: "btn-grid-custom",
+                        exportOptions: {
+                            modifier: {
+                                search: 'applied',
+                                order: 'applied'
+                            }
+                        }
+                    }
+                ],
+                "bProcessing": true,
+                "bServerSide": true,
+                "bPaginate": true,
+                "bDestroy": true,
+                "bDeferRender": true,
+                "bFilter": true,
+                "bSort": true,
+                "lengthChange": true,
+                "sPaginationType": "full_numbers",
+                "aLengthMenu": [[10, 25, 50, 500], [10, 25, 50, 500]],
+                "iDisplayLength": 10,
+                "language": {
+                    "sProcessing": "Processando...",
+                    "sLengthMenu": "Mostrar _MENU_ registros",
+                    "sZeroRecords": "Não foram encontrados resultados",
+                    "sInfo": "Mostrando de _START_ até _END_ de _MAX_ registros",
+                    "sInfoEmpty": "Mostrando de 0 até 0 de 0 registros",
+                    "sInfoFiltered": "(filtrado de _MAX_ registros no total)",
+                    "sEmptyTable": "Não há dados disponíveis",
+                    "sInfoPostFix": "",
+                    "sSearch": "Buscar:",
+                    "sUrl": "",
+                    "oAria": {
+                        "sSortAscending": ": clique para usar ordem crescente",
+                        "sSortDescending": ": clique para usar ordem decrescente"
+                    },
+                    "oPaginate": {
+                        "sFirst": "Primeiro",
+                        "sPrevious": "<",
+                        "sNext": ">",
+                        "sLast": "Último"
+                    }
+                }
+            });
+
+           @($"tb{tablename}").buttons().container().insertBefore("#@(tablename)");
+
+        @if (ViewBag.config.AtivaPesquisa == true)
+        {
+            <text>
+
+                $('#pesq@(tablename)Value').keyup(function () {
+                        var filtro = $('#pesq@(tablename)Value').val().trim() + '-|-' + $('input:radio[name="rd@(tablename)Value"]:checked').val();
+                        @($"tb{tablename}").search(filtro).draw();
+                });
+
+                $('input:radio[name="rd@(tablename)Value"]').click(function () {
+                    var filtro = $('#pesq@(tablename)Value').val().trim() + '-|-' + $('input:radio[name="rd@(tablename)Value"]:checked').val();
+                    @($"tb{tablename}").search(filtro).draw();
+                });
+
+            </text>
+        }
+
+        @* Ativar as linhas abaixo somente para DEBUG *@
+        @*
+            @Html.Raw($"tb{tablename}.on('xhr.dt', function (e, settings, json, xhr) {{");
+            @Html.Raw("console.log('e:' + e);");
+            @Html.Raw("console.log('settings:' + settings);");
+            @Html.Raw("console.log('json:' + json);");
+            @Html.Raw("console.log('xhr:' + xhr);");
+            @Html.Raw("})");
+        *@
+
+        @if (ViewBag.config.PermiteSelecao == true) {
+            <text>
+            @($"tb{tablename}").on('select', function (e, dt, type, indexes) {
+                var rowData = @($"tb{tablename}").rows(indexes).data().toArray();
+                $.post('@Url.Action($"{ViewBag.ActionRecebeSelecao}",$"{ViewBag.ControllerRecebeSelecao}")', { selecao: rowData[0]["@ViewBag.config.CampoId"], nomeGrid: '@ViewBag.config.NomeGrid' }, function (data) {
+                    @if(ViewBag.config.DirecionaAposSelecao == true) {
+                        @Html.Raw($"window.location = '{ViewBag.config.CaminhoRedirect}';");
+                    }
+                });
+            });
+            </text>
+        }
+
+        @* metodo abaixo usado para refresh no datatables, para utilizar basta incluir "reloadTable" na style class do campo*@
+        $('.reloadTable').change(function () {
+            @Html.Raw($"tb{tablename}.ajax.reload()");
+        });
+
+    })(jQuery);
+
+</script>
