@@ -48,6 +48,33 @@ namespace Curso.CrossCutting.Uteis
             return new RequestResultModel<List<T>>(StatusResult.Danger, default(List<T>), new MessageModel("Erro ao recuperar dados."));
         }
 
+        public RequestResultModel<T> OnGetEntity<T>(string controler, string metodo = null, string[] parametros = null)
+        {
+            var retorno = new RequestResultModel<T>();
+
+            try
+            {
+                using var client = MakeHttpClient();
+                var response = client.GetAsync(GetAddress(controler, metodo, parametros)).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var DadosJsonString = response.Content.ReadAsStringAsync().Result;
+                    var obj = JsonConvert.DeserializeObject<T>(DadosJsonString);
+                    retorno.Status = StatusResult.Success;
+                    retorno.Data = obj;
+                    return retorno;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new RequestResultModel<T>(StatusResult.Danger, default(T), new MessageModel($"Erro ao recuperar dados:{ex.Message}"));
+            }
+
+            return new RequestResultModel<T>(StatusResult.Danger, default(T), new MessageModel("Erro ao recuperar dados."));
+        }
+
+
         public RequestResultModel OnPost(string controler, object objeto, string metodo = null)
         {
             try

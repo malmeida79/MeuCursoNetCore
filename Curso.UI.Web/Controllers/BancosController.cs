@@ -49,7 +49,10 @@ namespace Curso.UI.Web.Controllers
 
         public ActionResult ModalEdita(int codEdita)
         {
-            return View();
+            var bco = new Banco();
+            var lista = _web.OnGetEntity<Banco>("bancos", null, new string[] { codEdita.ToString() });
+            bco = lista.Data;
+            return View(bco);
         }
 
         public ActionResult ModalNovo()
@@ -66,7 +69,9 @@ namespace Curso.UI.Web.Controllers
                 {
                     NomeBanco = camposTela["nomeBanco"].ToString(),
                     CodBanco = Convert.ToInt32(camposTela["codBanco"]),
-                    NumeroBanco = camposTela["numeroBanco"].ToString()
+                    NumeroBanco = camposTela["numeroBanco"].ToString(),
+                    DataInclusao = Convert.ToDateTime(camposTela["DataInclusao"].ToString()),
+                    DataAlteracao = DateTime.Now
                 };
 
                 RequestResultModel acao = _web.OnPut("bancos", banco);

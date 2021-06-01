@@ -16,57 +16,25 @@
         <form name="frmEdita" id="frmEdita" method="post">
             <div class="modal-body">
                 <div class="container-fluid pt-3">
-                    @*<input type="hidden" name="key" id="key" value="@Model.ProjetoKey" />
-                        <br />
-                        <div class="row mb-2">
-                            <div class="col-2">
-                                Nome Projeto:
-                            </div>
-                            <div class="col-10 text-left">
-                                <input type="text" class="form-control" id="descricao" name="descricao" value="@Model.NomeProjeto">
-                            </div>
+                    <input type="hidden" asp-for="CodBanco" name="CodBanco" id="CodBanco" />
+                    <input type="hidden" asp-for="DataInclusao" name="DataInclusao" id="DataInclusao" />
+                    <div class="row mb-2">
+                        <label>
+                            Nome Banco:
+                        </label>
+                        <div class="col-10 text-left">
+                            <input type="text" asp-for="NomeBanco" class="form-control" id="NomeBanco" name="NomeBanco">
                         </div>
-                        <div class="row mb-2">
-                            <div class="col-2">
-                                Tipo Projeto:
-                            </div>
-                            <div class="col-10 text-left">
-                                <select class="form-control" asp-for="TipoProjetoKey" name="tipo" id="tipo" asp-items="@(new SelectList(ViewBag.tipos,"TipoProjetoKey", "TipoProjetoDescricao"))"></select>
-                            </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label>
+                            Número Banco:
+                        </label>
+                        <div class="col-10 text-left">
+                            <input type="text" asp-for="NumeroBanco" class="form-control" id="NumeroBanco" name="NumeroBanco">
                         </div>
-                        <div class="row mb-2">
-                            <div class="col-2">
-                                Situação Projeto:
-                            </div>
-                            <div class="col-10 text-left">
-                                <select class="form-control" asp-for="SituacaoProjetoKey" name="situacao" id="situacao" asp-items="@(new SelectList(ViewBag.situacoes,"SituacaoProjetoKey", "SituacaoProjetoDescricao"))"></select>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-2">
-                                Centro de custo:
-                            </div>
-                            <div class="col-10 text-left">
-                                <select id="centroCustoKey" asp-for="CentroCustoKey" class="form-control" name="centroCustoKey" asp-items="@(new SelectList(ViewBag.ccusto, "CentroCustoKey", "CodigoCentroCusto"))"></select>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-2">
-                                Código projeto no Uno:
-                            </div>
-                            <div class="col-10 text-left">
-                                <input type="text" class="form-control" id="codProjetoUno" name="codProjetoUno" value="@Model.CodProjetoUno" readonly>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <div class="col-2">
-                                Ativo:
-                            </div>
-                            <div class="col-4 text-left">
-                                <input type="radio" id="ativo" name="ativo" value="sim" @if (Model.Ativo) { @Html.Raw("checked") }> Sim
-                                <input type="radio" id="ativo" name="ativo" value="nao" @if (!Model.Ativo) { @Html.Raw("checked") }> Não
-                            </div>
-                        </div>*@
+                    </div>
+
                     <div class="modal-footer mt-2">
                         <button type="button" class="btn btn-primary" onclick="salvarAlteracao()">Salvar</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
