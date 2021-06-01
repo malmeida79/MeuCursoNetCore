@@ -30,8 +30,6 @@ namespace Curso.UI.Web.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.bancos = GetBancos();
-
             List<JSDataTableColum> colunas = new List<JSDataTableColum>
             {
                 new JSDataTableColum() { Data = "codBanco", Name = "codBanco", Title = "Código" },
@@ -53,17 +51,6 @@ namespace Curso.UI.Web.Controllers
             ViewBag.config = config;
 
             return View();
-        }
-
-        private List<Banco> GetBancos(bool insertSelecione = true)
-        {
-            var Bancos = _web.OnGet<Banco>("bancos");
-            var BancosData = Bancos.Data?.OrderBy(x => x.NomeBanco).ToList() ?? new List<Banco>();
-            if (insertSelecione)
-            {
-                BancosData.Insert(0, new Banco { CodBanco = 0, NomeBanco = "Selecione" });
-            }
-            return BancosData;
         }
 
         public ActionResult ModalExclui(int codExclui)
