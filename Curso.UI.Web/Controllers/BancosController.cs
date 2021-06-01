@@ -50,8 +50,8 @@ namespace Curso.UI.Web.Controllers
         public ActionResult ModalEdita(int codEdita)
         {
             var bco = new Banco();
-            var lista = _web.OnGetEntity<Banco>("bancos", null, new string[] { codEdita.ToString() });
-            bco = lista.Data;
+            var lista = _web.OnGet<Banco>("bancos", null, new string[] { codEdita.ToString() });
+            bco = lista.Data?.FirstOrDefault();
             return View(bco);
         }
 

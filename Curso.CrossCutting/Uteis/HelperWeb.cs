@@ -4,6 +4,7 @@ using Curso.Domain.Enuns;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -34,7 +35,7 @@ namespace Curso.CrossCutting.Uteis
                 if (response.IsSuccessStatusCode)
                 {
                     var DadosJsonString = response.Content.ReadAsStringAsync().Result;
-                    var obj = JsonConvert.DeserializeObject<T[]>(DadosJsonString).ToList();
+                    var obj = DeserializeSingleOrList<T>(new JsonTextReader(new StringReader(DadosJsonString)));
                     retorno.Status = StatusResult.Success;
                     retorno.Data = obj;
                     return retorno;
@@ -47,33 +48,6 @@ namespace Curso.CrossCutting.Uteis
 
             return new RequestResultModel<List<T>>(StatusResult.Danger, default(List<T>), new MessageModel("Erro ao recuperar dados."));
         }
-
-        public RequestResultModel<T> OnGetEntity<T>(string controler, string metodo = null, string[] parametros = null)
-        {
-            var retorno = new RequestResultModel<T>();
-
-            try
-            {
-                using var client = MakeHttpClient();
-                var response = client.GetAsync(GetAddress(controler, metodo, parametros)).Result;
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var DadosJsonString = response.Content.ReadAsStringAsync().Result;
-                    var obj = JsonConvert.DeserializeObject<T>(DadosJsonString);
-                    retorno.Status = StatusResult.Success;
-                    retorno.Data = obj;
-                    return retorno;
-                }
-            }
-            catch (Exception ex)
-            {
-                return new RequestResultModel<T>(StatusResult.Danger, default(T), new MessageModel($"Erro ao recuperar dados:{ex.Message}"));
-            }
-
-            return new RequestResultModel<T>(StatusResult.Danger, default(T), new MessageModel("Erro ao recuperar dados."));
-        }
-
 
         public RequestResultModel OnPost(string controler, object objeto, string metodo = null)
         {
@@ -116,6 +90,8 @@ namespace Curso.CrossCutting.Uteis
                 return new RequestResultModel(StatusResult.Danger, new MessageModel($"Erro ao excluir dados:{ex.Message}."));
             }
         }
+
+        #region Internos
 
         private string GetAddress(string controler, string metodo = null, string[] parametros = null)
         {
@@ -228,5 +204,25 @@ namespace Curso.CrossCutting.Uteis
                 return res;
             }
         }
+
+        private static List<T> DeserializeSingleOrList<T>(JsonReader jsonReader)
+        {
+            if (jsonReader.Read())
+            {
+                switch (jsonReader.TokenType)
+                {
+                    case JsonToken.StartArray:
+                        return new JsonSerializer().Deserialize<List<T>>(jsonReader);
+
+                    case JsonToken.StartObject:
+                        var instance = new JsonSerializer().Deserialize<T>(jsonReader);
+                        return new List<T> { instance };
+                }
+            }
+
+            throw new InvalidOperationException("Arquivo JSON em formato incorreto!");
+        }
+
+        #endregion
     }
 }
